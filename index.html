@@ -72,10 +72,10 @@
     <span id="toast-msg" class="text-sm font-medium">Copiado al portapapeles</span>
   </div>
 
-  <!-- ================= TOP NAVIGATION HEADER ================= -->
+  <!-- ================= TOP NAVIGATION HEADER (FIXED OVERLAP & CLEAN SPACING) ================= -->
   <header class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
+      <div class="flex flex-wrap items-center justify-between min-h-[5rem] py-3 gap-4">
         
         <!-- Brand & Co-Branding -->
         <div class="flex items-center space-x-3 sm:space-x-4">
@@ -93,9 +93,9 @@
           </div>
         </div>
 
-        <!-- Global Multi-Account Switcher -->
-        <div class="flex items-center space-x-3">
-          <div class="text-right hidden sm:block">
+        <!-- Global Multi-Account Switcher & Environment Status -->
+        <div class="flex items-center flex-wrap gap-3">
+          <div class="text-right hidden md:block">
             <label for="companySelect" class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">Sociedad Emisora Activa</label>
             <span id="headerAccountBadge" class="text-xs font-mono font-bold text-fedex-purple">CTA: 905820290</span>
           </div>
@@ -110,8 +110,8 @@
             </div>
           </div>
 
-          <!-- Environment Badge -->
-          <div class="hidden md:flex items-center bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-xl space-x-2 text-xs font-semibold">
+          <!-- Environment Status Badge -->
+          <div class="flex items-center bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-xl space-x-2 text-xs font-semibold shadow-xs">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
             <span>PROD / QA Activo</span>
           </div>
@@ -138,7 +138,7 @@
       <!-- Quick Active Account Mini Card -->
       <div class="bg-gradient-to-br from-fedex-purple to-fedex-purple-dark text-white rounded-2xl p-4 min-w-[310px] shadow-lg border border-purple-800">
         <div class="flex items-center justify-between text-xs text-purple-200 font-semibold mb-1">
-          <span>CUENTA EN CONSOLA</span>
+          <span>SOCIEDAD SELECCIONADA</span>
           <span id="cardRut" class="font-mono text-amber-300 font-bold">RUT: 96.572.360-9</span>
         </div>
         <div id="cardCompanyName" class="font-bold text-white text-sm sm:text-base truncate">Comercial Kaufmann SADOM</div>
@@ -168,7 +168,7 @@
           <p class="text-xs text-gray-500 mt-0.5">Parámetros oficiales provistos para Basic Auth (Token), Ship/Cancel API y Tracking API para las 3 empresas de Kaufmann. Haz clic en <strong>Cargar y Copiar</strong> para activar y copiar todo el lote en 1 solo clic.</p>
         </div>
         <div class="flex items-center space-x-2">
-          <button onclick="window.copyAllAccountsJson()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-sans font-semibold text-xs px-3 py-1.5 rounded-lg border border-gray-300 transition-all flex items-center space-x-1.5 shadow-sm">
+          <button onclick="window.copyAllAccountsJson()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-sans font-semibold text-xs px-3 py-1.5 rounded-lg border border-gray-300 transition-all flex items-center space-x-1.5 shadow-sm cursor-pointer">
             <i class="fa-solid fa-file-code text-fedex-purple"></i>
             <span>Exportar Todo (JSON)</span>
           </button>
@@ -201,37 +201,37 @@
               <td class="py-3.5 px-3 font-bold text-fedex-purple">
                 <div class="flex items-center space-x-1.5">
                   <span>905820290</span>
-                  <button onclick="window.copyRawText('905820290', 'Cuenta EAN')" title="Copiar Cuenta" class="text-gray-400 hover:text-fedex-purple p-1"><i class="fa-regular fa-copy text-[11px]"></i></button>
+                  <button onclick="window.copyRawText('905820290', 'Cuenta EAN')" title="Copiar Cuenta" class="text-gray-400 hover:text-fedex-purple p-1 cursor-pointer"><i class="fa-regular fa-copy text-[11px]"></i></button>
                 </div>
               </td>
               <td class="py-3.5 px-3">
                 <div class="flex items-center justify-between text-[11px] py-0.5">
                   <span class="truncate max-w-[150px]"><span class="text-gray-400">U:</span> HMplqZiKBL4aMjFhqe5XP6tR</span>
-                  <button onclick="window.copyRawText('HMplqZiKBL4aMjFhqe5XP6tR', 'Usuario OAuth')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('HMplqZiKBL4aMjFhqe5XP6tR', 'Usuario OAuth')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
                 <div class="flex items-center justify-between text-[11px] text-gray-500 py-0.5">
                   <span class="truncate max-w-[150px]"><span class="text-gray-400">P:</span> PHTHVVouUv1pab1dJhrKUFhfUA</span>
-                  <button onclick="window.copyRawText('PHTHVVouUv1pab1dJhrKUFhfUA', 'Contraseña OAuth')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('PHTHVVouUv1pab1dJhrKUFhfUA', 'Contraseña OAuth')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
               </td>
               <td class="py-3.5 px-3">
                 <div class="flex items-center justify-between text-[11px] text-gray-700 py-0.5">
                   <span class="truncate max-w-[160px]" title="l7018e70dca23444a2934500414ac7bc1d"><span class="text-gray-400">K:</span> l7018e70dca23444a29...</span>
-                  <button onclick="window.copyRawText('l7018e70dca23444a2934500414ac7bc1d', 'Ship Client Key')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('l7018e70dca23444a2934500414ac7bc1d', 'Ship Client Key')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
                 <div class="flex items-center justify-between text-[11px] text-gray-500 py-0.5">
                   <span class="truncate max-w-[160px]" title="2d1a949dda914f948417d7806f5af23c"><span class="text-gray-400">S:</span> 2d1a949dda914f9484...</span>
-                  <button onclick="window.copyRawText('2d1a949dda914f948417d7806f5af23c', 'Ship Client Secret')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('2d1a949dda914f948417d7806f5af23c', 'Ship Client Secret')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
               </td>
               <td class="py-3.5 px-3">
                 <div class="flex items-center justify-between text-[11px] text-gray-700 py-0.5">
                   <span class="truncate max-w-[160px]" title="l7655abb26c9354a279de01f40a5e1a679"><span class="text-gray-400">K:</span> l7655abb26c9354a27...</span>
-                  <button onclick="window.copyRawText('l7655abb26c9354a279de01f40a5e1a679', 'Track Client Key')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('l7655abb26c9354a279de01f40a5e1a679', 'Track Client Key')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
                 <div class="flex items-center justify-between text-[11px] text-gray-500 py-0.5">
                   <span class="truncate max-w-[160px]" title="a3a9d2ab74ab40cab8badb76212a8781"><span class="text-gray-400">S:</span> a3a9d2ab74ab40cab8...</span>
-                  <button onclick="window.copyRawText('a3a9d2ab74ab40cab8badb76212a8781', 'Track Client Secret')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('a3a9d2ab74ab40cab8badb76212a8781', 'Track Client Secret')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
               </td>
               <td class="py-3.5 px-4 text-center">
@@ -254,33 +254,33 @@
               <td class="py-3.5 px-3 font-bold text-fedex-purple">
                 <div class="flex items-center space-x-1.5">
                   <span>910912798</span>
-                  <button onclick="window.copyRawText('910912798', 'Cuenta EAN')" title="Copiar Cuenta" class="text-gray-400 hover:text-fedex-purple p-1"><i class="fa-regular fa-copy text-[11px]"></i></button>
+                  <button onclick="window.copyRawText('910912798', 'Cuenta EAN')" title="Copiar Cuenta" class="text-gray-400 hover:text-fedex-purple p-1 cursor-pointer"><i class="fa-regular fa-copy text-[11px]"></i></button>
                 </div>
               </td>
               <td class="py-3.5 px-3">
                 <div class="flex items-center justify-between text-[11px] py-0.5">
                   <span class="truncate max-w-[150px]"><span class="text-gray-400">U:</span> TKrjmKlSl0Tb7aELZFh4QBLn</span>
-                  <button onclick="window.copyRawText('TKrjmKlSl0Tb7aELZFh4QBLn', 'Usuario OAuth')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('TKrjmKlSl0Tb7aELZFh4QBLn', 'Usuario OAuth')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
                 <div class="flex items-center justify-between text-[11px] text-gray-500 py-0.5">
                   <span class="truncate max-w-[150px]"><span class="text-gray-400">P:</span> QianjBOomk1JFp4X9SOylhWynu</span>
-                  <button onclick="window.copyRawText('QianjBOomk1JFp4X9SOylhWynu', 'Contraseña OAuth')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('QianjBOomk1JFp4X9SOylhWynu', 'Contraseña OAuth')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
               </td>
               <td class="py-3.5 px-3">
                 <div class="flex items-center justify-between text-[11px] text-gray-700 py-0.5">
                   <span class="truncate max-w-[160px]" title="l7d7909ce8a6724bad9426a1c4a218d6db"><span class="text-gray-400">K:</span> l7d7909ce8a6724bad9...</span>
-                  <button onclick="window.copyRawText('l7d7909ce8a6724bad9426a1c4a218d6db', 'Ship Client Key')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('l7d7909ce8a6724bad9426a1c4a218d6db', 'Ship Client Key')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
                 <div class="flex items-center justify-between text-[11px] text-gray-500 py-0.5">
                   <span class="truncate max-w-[160px]" title="2a9c61e47f0e4cd7bd1f0ee64afc2aee"><span class="text-gray-400">S:</span> 2a9c61e47f0e4cd7bd...</span>
-                  <button onclick="window.copyRawText('2a9c61e47f0e4cd7bd1f0ee64afc2aee', 'Ship Client Secret')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('2a9c61e47f0e4cd7bd1f0ee64afc2aee', 'Ship Client Secret')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
               </td>
               <td class="py-3.5 px-3">
                 <div class="flex items-center justify-between text-[11px] text-gray-500 py-0.5">
                   <span class="text-gray-500 italic">Hereda Track Hub Corporativo</span>
-                  <button onclick="window.copyRawText('l7655abb26c9354a279de01f40a5e1a679 / a3a9d2ab74ab40cab8badb76212a8781', 'Track Corporativo')" title="Copiar Key/Secret de Track" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('l7655abb26c9354a279de01f40a5e1a679 / a3a9d2ab74ab40cab8badb76212a8781', 'Track Corporativo')" title="Copiar Key/Secret de Track" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
               </td>
               <td class="py-3.5 px-4 text-center">
@@ -303,33 +303,33 @@
               <td class="py-3.5 px-3 font-bold text-fedex-purple">
                 <div class="flex items-center space-x-1.5">
                   <span>905264494</span>
-                  <button onclick="window.copyRawText('905264494', 'Cuenta EAN')" title="Copiar Cuenta" class="text-gray-400 hover:text-fedex-purple p-1"><i class="fa-regular fa-copy text-[11px]"></i></button>
+                  <button onclick="window.copyRawText('905264494', 'Cuenta EAN')" title="Copiar Cuenta" class="text-gray-400 hover:text-fedex-purple p-1 cursor-pointer"><i class="fa-regular fa-copy text-[11px]"></i></button>
                 </div>
               </td>
               <td class="py-3.5 px-3">
                 <div class="flex items-center justify-between text-[11px] py-0.5">
                   <span class="truncate max-w-[150px]"><span class="text-gray-400">U:</span> 0jLqYcG4IBGdwjciWoqma78T</span>
-                  <button onclick="window.copyRawText('0jLqYcG4IBGdwjciWoqma78T', 'Usuario OAuth')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('0jLqYcG4IBGdwjciWoqma78T', 'Usuario OAuth')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
                 <div class="flex items-center justify-between text-[11px] text-gray-500 py-0.5">
                   <span class="truncate max-w-[150px]"><span class="text-gray-400">P:</span> IwxxC5CuKw67cfUXLLl7rUyilX</span>
-                  <button onclick="window.copyRawText('IwxxC5CuKw67cfUXLLl7rUyilX', 'Contraseña OAuth')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('IwxxC5CuKw67cfUXLLl7rUyilX', 'Contraseña OAuth')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
               </td>
               <td class="py-3.5 px-3">
                 <div class="flex items-center justify-between text-[11px] text-gray-700 py-0.5">
                   <span class="truncate max-w-[160px]" title="l70f3adee13957447ba070f6f7cae17de7"><span class="text-gray-400">K:</span> l70f3adee13957447b...</span>
-                  <button onclick="window.copyRawText('l70f3adee13957447ba070f6f7cae17de7', 'Ship Client Key')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('l70f3adee13957447ba070f6f7cae17de7', 'Ship Client Key')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
                 <div class="flex items-center justify-between text-[11px] text-gray-500 py-0.5">
                   <span class="truncate max-w-[160px]" title="4a4d4cf2d90e4a6783e61a50df3c6b61"><span class="text-gray-400">S:</span> 4a4d4cf2d90e4a6783...</span>
-                  <button onclick="window.copyRawText('4a4d4cf2d90e4a6783e61a50df3c6b61', 'Ship Client Secret')" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('4a4d4cf2d90e4a6783e61a50df3c6b61', 'Ship Client Secret')" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
               </td>
               <td class="py-3.5 px-3">
                 <div class="flex items-center justify-between text-[11px] text-gray-500 py-0.5">
                   <span class="text-gray-500 italic">Hereda Track Hub Corporativo</span>
-                  <button onclick="window.copyRawText('l7655abb26c9354a279de01f40a5e1a679 / a3a9d2ab74ab40cab8badb76212a8781', 'Track Corporativo')" title="Copiar Key/Secret de Track" class="text-gray-400 hover:text-fedex-purple ml-1"><i class="fa-regular fa-copy text-[10px]"></i></button>
+                  <button onclick="window.copyRawText('l7655abb26c9354a279de01f40a5e1a679 / a3a9d2ab74ab40cab8badb76212a8781', 'Track Corporativo')" title="Copiar Key/Secret de Track" class="text-gray-400 hover:text-fedex-purple ml-1 cursor-pointer"><i class="fa-regular fa-copy text-[10px]"></i></button>
                 </div>
               </td>
               <td class="py-3.5 px-4 text-center">
@@ -422,15 +422,15 @@
                 <label class="text-[11px] font-bold text-gray-500 block">UserName (Client ID):</label>
                 <div class="flex items-center mt-1">
                   <input id="oauthUsername" type="text" readonly class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono text-gray-800">
-                  <button onclick="window.copyField('oauthUsername')" title="Copiar UserName" class="ml-2 text-gray-500 hover:text-fedex-purple p-2 text-sm"><i class="fa-regular fa-copy"></i></button>
+                  <button onclick="window.copyField('oauthUsername')" title="Copiar UserName" class="ml-2 text-gray-500 hover:text-fedex-purple p-2 text-sm cursor-pointer"><i class="fa-regular fa-copy"></i></button>
                 </div>
               </div>
               <div>
                 <label class="text-[11px] font-bold text-gray-500 block">Password (Client Secret):</label>
                 <div class="flex items-center mt-1">
                   <input id="oauthPassword" type="password" readonly class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono text-gray-800">
-                  <button onclick="window.togglePasswordVisibility('oauthPassword')" title="Ver u Ocultar" class="ml-2 text-gray-500 hover:text-fedex-purple p-2 text-sm"><i class="fa-regular fa-eye"></i></button>
-                  <button onclick="window.copyField('oauthPassword')" title="Copiar Password" class="ml-1 text-gray-500 hover:text-fedex-purple p-2 text-sm"><i class="fa-regular fa-copy"></i></button>
+                  <button onclick="window.togglePasswordVisibility('oauthPassword')" title="Ver u Ocultar" class="ml-2 text-gray-500 hover:text-fedex-purple p-2 text-sm cursor-pointer"><i class="fa-regular fa-eye"></i></button>
+                  <button onclick="window.copyField('oauthPassword')" title="Copiar Password" class="ml-1 text-gray-500 hover:text-fedex-purple p-2 text-sm cursor-pointer"><i class="fa-regular fa-copy"></i></button>
                 </div>
               </div>
               <div>
@@ -530,7 +530,7 @@
           <div>
             <div class="flex items-center space-x-2">
               <span class="px-2.5 py-1 bg-purple-100 text-fedex-purple font-mono font-bold text-xs rounded-md">POST</span>
-              <span class="font-mono text-sm text-gray-700 font-semibold">https://apis.fedex.com/track/v1/trackingnumbers</span>
+              <span id="trackEndpointBadge" class="font-mono text-sm text-gray-700 font-semibold">https://apis.fedex.com/track/v1/trackingnumbers</span>
             </div>
             <h2 class="text-lg font-bold text-fedex-purple mt-2">3. Trazabilidad Operativa & Visor de Entrega Real (Track API)</h2>
             <p class="text-xs text-gray-500">Consulta por AWB, por Referencia (Unidad de Transporte / Factura) e inspección integral con eventos de escaneo, recepción y comprobante POD.</p>
@@ -547,18 +547,33 @@
             <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Criterio de Rastreo</label>
             <select id="trackSearchType" onchange="window.toggleTrackInputs()" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-semibold text-gray-800">
               <option value="AWB">Por Número de Guía AWB (384403557611)</option>
-              <option value="TRANSPORT_UNIT">Por Referencia: Unidad de Transporte (Patente/Móvil)</option>
-              <option value="INVOICE">Por Referencia: Factura / PO (RD - 1)</option>
+              <option value="TRANSPORT_UNIT">Por Referencia: Unidad de Transporte (CAMION-FLOTA-452)</option>
+              <option value="SPOD">Descarga SPOD / Comprobante de Entrega PDF</option>
             </select>
           </div>
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
             <label id="trackInputLabel" class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Número de Guía (Tracking)</label>
-            <input id="trackInputValue" type="text" value="384403557611" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono font-bold text-fedex-purple">
+            <input id="trackInputValue" type="text" value="384403557611" oninput="window.renderTrackRequestPayload()" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono font-bold text-fedex-purple">
           </div>
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
             <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Cuenta Consultora Activa</label>
             <input id="trackAccountBadge" type="text" readonly class="w-full bg-gray-100 border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono text-gray-700">
           </div>
+        </div>
+
+        <!-- INTERACTIVE REQUEST PAYLOAD FOR TRACKING -->
+        <div class="mt-4 bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-2">
+          <div class="flex items-center justify-between text-xs font-bold text-gray-700">
+            <div class="flex items-center space-x-2">
+              <span class="w-2 h-2 rounded-full bg-fedex-purple"></span>
+              <span>Payload JSON de Solicitud (Request Enviado por SAP a Track API)</span>
+            </div>
+            <button onclick="window.copyCode('trackRequestJson')" class="bg-white hover:bg-fedex-purple hover:text-white border border-gray-300 text-fedex-purple font-mono text-[11px] font-bold px-3 py-1 rounded-lg transition-all shadow-xs flex items-center space-x-1.5 cursor-pointer">
+              <i class="fa-regular fa-copy"></i>
+              <span>Copiar Request</span>
+            </button>
+          </div>
+          <pre id="trackRequestJson" class="code-dark p-3.5 rounded-xl text-xs font-mono max-h-48 overflow-y-auto border border-gray-800 leading-relaxed"></pre>
         </div>
 
         <!-- ================= FEDEX EVENT CODES EXPLORER (DEVELOPER PORTAL GUIDELINES) ================= -->
@@ -577,6 +592,14 @@
               <i class="fa-solid fa-arrow-up-right-from-square"></i>
               <span>Ver Guía en FedEx Developer Portal</span>
             </a>
+          </div>
+
+          <!-- Official Technical Clarification Callout Banner -->
+          <div class="mt-3 p-3.5 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-start space-x-2.5">
+            <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5 text-sm"></i>
+            <div>
+              <span class="font-bold">Aclaratoria Técnica / Alcance de Códigos:</span> Los 16 eventos mostrados corresponden a los hitos operacionales clave de mayor frecuencia en la red de distribución B2B. La API FedEx Track cuenta con un catálogo exhaustivo y granular de sub-estados y variantes de excepción disponible en el <a href="https://developer.fedex.com/wirc/browser/en-us/guides/api-reference#trackingeventcodesforbasicintegratedvisibilityapiformerlytrackapishipmentcreationlabelandpickup" target="_blank" rel="noopener noreferrer" class="underline font-semibold text-amber-950 hover:text-fedex-orange">FedEx Developer Portal</a>.
+            </div>
           </div>
 
           <!-- Filter & Search Bar -->
@@ -759,19 +782,34 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
             <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Criterio (searchType)</label>
-            <select id="docSearchType" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-semibold text-gray-800">
+            <select id="docSearchType" onchange="window.renderGetDocsRequestPayload()" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-semibold text-gray-800">
               <option value="AWB">AWB (Número de Guía Original)</option>
               <option value="DOC_REF">DOC_REF (Referencia del Documento)</option>
             </select>
           </div>
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
             <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Valor de Búsqueda</label>
-            <input id="docSearchValue" type="text" value="384403557611" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono font-bold text-fedex-purple">
+            <input id="docSearchValue" type="text" value="384403557611" oninput="window.renderGetDocsRequestPayload()" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono font-bold text-fedex-purple">
           </div>
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
             <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Cuenta Pagadora</label>
             <input id="docAccountBadge" type="text" readonly class="w-full bg-gray-100 border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono text-gray-700">
           </div>
+        </div>
+
+        <!-- INTERACTIVE REQUEST PAYLOAD FOR GET DOCUMENTS -->
+        <div class="mt-4 bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-2">
+          <div class="flex items-center justify-between text-xs font-bold text-gray-700">
+            <div class="flex items-center space-x-2">
+              <span class="w-2 h-2 rounded-full bg-fedex-purple"></span>
+              <span>Payload JSON de Solicitud (Request Enviado por SAP a Get Documents)</span>
+            </div>
+            <button onclick="window.copyCode('docsRequestJson')" class="bg-white hover:bg-fedex-purple hover:text-white border border-gray-300 text-fedex-purple font-mono text-[11px] font-bold px-3 py-1 rounded-lg transition-all shadow-xs flex items-center space-x-1.5 cursor-pointer">
+              <i class="fa-regular fa-copy"></i>
+              <span>Copiar Request</span>
+            </button>
+          </div>
+          <pre id="docsRequestJson" class="code-dark p-3.5 rounded-xl text-xs font-mono max-h-40 overflow-y-auto border border-gray-800 leading-relaxed"></pre>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
@@ -845,15 +883,25 @@
           <div class="space-y-4">
             <div>
               <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Guía AWB Máster a Cancelar</label>
-              <input id="cancelMasterAwb" type="text" value="384610292303" class="w-full bg-white border border-gray-300 rounded-lg py-2 px-3 text-xs font-mono font-bold text-red-600 focus:outline-none focus:border-red-500">
+              <input id="cancelMasterAwb" type="text" value="384610292303" oninput="window.renderCancelPayload()" class="w-full bg-white border border-gray-300 rounded-lg py-2 px-3 text-xs font-mono font-bold text-red-600 focus:outline-none focus:border-red-500">
             </div>
             <div>
-              <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Payload JSON de Cancelación</label>
+              <div class="flex items-center justify-between text-[11px] font-bold text-gray-600 uppercase mb-1">
+                <span>Payload JSON de Cancelación</span>
+                <button onclick="window.copyCode('cancelPayloadJson')" class="text-fedex-purple hover:underline text-[11px] flex items-center space-x-1 cursor-pointer">
+                  <i class="fa-regular fa-copy"></i><span>Copiar JSON</span>
+                </button>
+              </div>
               <pre id="cancelPayloadJson" class="code-dark p-4 rounded-xl text-xs font-mono h-48 overflow-y-auto border border-gray-800 leading-relaxed"></pre>
             </div>
           </div>
           <div class="space-y-4">
-            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Respuesta del Servidor FedEx</label>
+            <div class="flex items-center justify-between text-[11px] font-bold text-gray-600 uppercase">
+              <span>Respuesta del Servidor FedEx</span>
+              <button onclick="window.copyCode('cancelResponseJson')" class="text-fedex-purple hover:underline text-[11px] flex items-center space-x-1 cursor-pointer">
+                <i class="fa-regular fa-copy"></i><span>Copiar JSON</span>
+              </button>
+            </div>
             <pre id="cancelResponseJson" class="code-dark p-4 rounded-xl text-xs font-mono h-60 overflow-y-auto border border-gray-800 leading-relaxed"></pre>
           </div>
         </div>
@@ -1230,6 +1278,8 @@
       window.applyCompanyData();
       window.renderOAuthPayloads();
       window.renderShipPayload();
+      window.renderTrackRequestPayload();
+      window.renderGetDocsRequestPayload();
       window.renderCancelPayload();
       window.highlightActiveTableRow(key);
       showToast(`Cargada: ${COMPANIES_DATA[key].name}`);
@@ -1247,6 +1297,8 @@
       window.applyCompanyData();
       window.renderOAuthPayloads();
       window.renderShipPayload();
+      window.renderTrackRequestPayload();
+      window.renderGetDocsRequestPayload();
       window.renderCancelPayload();
       window.highlightActiveTableRow(key);
 
@@ -1648,6 +1700,62 @@
       showToast("Guía y 3 etiquetas generadas exitosamente");
     };
 
+    window.renderTrackRequestPayload = function() {
+      const data = COMPANIES_DATA[currentCompanyKey];
+      const type = document.getElementById('trackSearchType').value;
+      const inputVal = document.getElementById('trackInputValue').value || "384403557611";
+      const epBadge = document.getElementById('trackEndpointBadge');
+
+      let reqPayload = {};
+
+      if (type === "AWB") {
+        if (epBadge) epBadge.innerText = "https://apis.fedex.com/track/v1/trackingnumbers";
+        reqPayload = {
+          "trackingInfo": [
+            {
+              "trackingNumberInfo": {
+                "trackingNumber": inputVal,
+                "carrierCode": "FDXE"
+              }
+            }
+          ],
+          "includeDetailedScans": true
+        };
+      } else if (type === "TRANSPORT_UNIT") {
+        if (epBadge) epBadge.innerText = "https://apis.fedex.com/track/v1/referencenumbers";
+        reqPayload = {
+          "referencesInformation": {
+            "type": "SHIPPER_REFERENCE",
+            "value": inputVal,
+            "accountNumber": data.accountNumber,
+            "shipDateBegin": "2026-10-30",
+            "shipDateEnd": "2026-11-15"
+          },
+          "includeDetailedScans": true
+        };
+      } else { // SPOD
+        if (epBadge) epBadge.innerText = "https://apis.fedex.com/track/v1/referencenumbers";
+        reqPayload = {
+          "trackDocumentDetail": {
+            "documentType": "SIGNATURE_PROOF_OF_DELIVERY",
+            "documentFormat": "PDF"
+          },
+          "trackDocumentSpecification": [
+            {
+              "trackingNumberInfo": {
+                "trackingNumber": inputVal,
+                "carrierCode": "FDXE"
+              },
+              "accountNumber": data.accountNumber
+            }
+          ]
+        };
+      }
+
+      const reqEl = document.getElementById('trackRequestJson');
+      if (reqEl) reqEl.textContent = JSON.stringify(reqPayload, null, 2);
+    };
+
     window.toggleTrackInputs = function() {
       const type = document.getElementById('trackSearchType').value;
       const label = document.getElementById('trackInputLabel');
@@ -1657,17 +1765,20 @@
         if (label) label.innerText = "Número de Guía (AWB / Tracking)";
         if (input) input.value = "384403557611";
       } else if (type === "TRANSPORT_UNIT") {
-        if (label) label.innerText = "Referencia: Unidad de Transporte";
+        if (label) label.innerText = "Referencia: Unidad de Transporte (Placa/Móvil)";
         if (input) input.value = "CAMION-FLOTA-452";
       } else {
-        if (label) label.innerText = "Referencia: Factura / PO";
-        if (input) input.value = "RD - 1";
+        if (label) label.innerText = "Número de Guía para SPOD (PDF)";
+        if (input) input.value = "396978519329";
       }
+
+      window.renderTrackRequestPayload();
     };
 
     window.executeTrackingSim = function() {
       const input = document.getElementById('trackInputValue');
       const value = input ? input.value : "384403557611";
+      window.renderTrackRequestPayload();
       showToast(`Trazabilidad actualizada para: ${value}`);
     };
 
@@ -1681,9 +1792,25 @@
       showToast("Descargando Comprobante POD");
     };
 
+    window.renderGetDocsRequestPayload = function() {
+      const data = COMPANIES_DATA[currentCompanyKey];
+      const searchType = document.getElementById('docSearchType').value;
+      const searchValue = document.getElementById('docSearchValue').value || "384403557611";
+
+      const reqPayload = {
+        "account": data.accountNumber,
+        "searchType": searchType,
+        "value": searchValue
+      };
+
+      const reqEl = document.getElementById('docsRequestJson');
+      if (reqEl) reqEl.textContent = JSON.stringify(reqPayload, null, 2);
+    };
+
     window.executeGetDocsSim = function() {
       const input = document.getElementById('docSearchValue');
       const searchValue = input ? input.value : "384403557611";
+      window.renderGetDocsRequestPayload();
 
       const response = {
         "pouchId": "eddff0f4",
@@ -1814,6 +1941,8 @@
         window.applyCompanyData();
         window.renderOAuthPayloads();
         window.renderShipPayload();
+        window.renderTrackRequestPayload();
+        window.renderGetDocsRequestPayload();
         window.renderCancelPayload();
         window.renderEventCodes("ALL", "");
         window.inspectEventCode("DL");
