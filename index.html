@@ -6,10 +6,10 @@
   <title>FedEx Chile API Dojo | Portal de Integración KAUFMANN B2B</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Inter -->
+  <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -22,10 +22,10 @@
               purple: '#4D148C',
               'purple-dark': '#380E66',
               'purple-light': '#6B25B3',
-              orange: '#FF6600',
-              'orange-hover': '#E05A00',
+              orange: '#FF6200',
+              'orange-hover': '#E05500',
               gray: '#333333',
-              'light-bg': '#F7F8FA',
+              'light-bg': '#F8F9FC',
               border: '#E2E8F0'
             },
             kaufmann: {
@@ -42,14 +42,25 @@
     }
   </script>
   <style>
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
     ::-webkit-scrollbar-track { background: #F1F5F9; }
     ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
-    .code-container {
-      background: #1E1E2E;
-      color: #CDD6F4;
+    .code-dark {
+      background: #111827;
+      color: #E5E7EB;
+    }
+    .timeline-node::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      bottom: -16px;
+      left: 17px;
+      width: 2px;
+      background: #E2E8F0;
+    }
+    .timeline-node:last-child::before {
+      display: none;
     }
   </style>
 </head>
@@ -61,7 +72,7 @@
     <span id="toast-msg" class="text-sm font-medium">Copiado al portapapeles</span>
   </div>
 
-  <!-- ================= TOP NAVIGATION & HEADER ================= -->
+  <!-- ================= TOP NAVIGATION HEADER ================= -->
   <header class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
@@ -76,20 +87,20 @@
           <div class="flex flex-col">
             <div class="flex items-center space-x-2">
               <span class="text-lg font-black tracking-wider text-kaufmann-navy">KAUFMANN</span>
-              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-300">Dojo API CL v4.0</span>
+              <span class="bg-purple-100 text-fedex-purple text-[10px] font-bold px-2 py-0.5 rounded-full border border-purple-200">API Dojo CL v4.0</span>
             </div>
-            <span class="text-[11px] text-gray-500 font-medium">B2B Domestic Ship & Cedible Return Hub</span>
+            <span class="text-[11px] text-gray-500 font-medium">B2B Domestic Ship & Returns Integration Hub</span>
           </div>
         </div>
 
         <!-- Global Multi-Account Switcher -->
         <div class="flex items-center space-x-3">
           <div class="text-right hidden sm:block">
-            <label for="companySelect" class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">Cuenta Corporativa Activa</label>
-            <span id="headerAccountBadge" class="text-xs font-mono font-semibold text-fedex-purple">CTA: 905820290</span>
+            <label for="companySelect" class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">Sociedad Emisora Activa</label>
+            <span id="headerAccountBadge" class="text-xs font-mono font-bold text-fedex-purple">CTA: 905820290</span>
           </div>
           <div class="relative">
-            <select id="companySelect" onchange="onCompanyChange(this.value)" class="appearance-none bg-fedex-light-bg border-2 border-fedex-purple/30 text-fedex-purple text-sm font-bold rounded-xl py-2 pl-4 pr-10 focus:outline-none focus:border-fedex-purple shadow-sm transition-all hover:bg-white cursor-pointer">
+            <select id="companySelect" onchange="onCompanyChange(this.value)" class="appearance-none bg-fedex-light-bg border-2 border-fedex-purple/30 text-fedex-purple text-xs sm:text-sm font-bold rounded-xl py-2 pl-3 sm:pl-4 pr-9 focus:outline-none focus:border-fedex-purple shadow-sm transition-all hover:bg-white cursor-pointer">
               <option value="COMERCIAL_KAUFMANN">Comercial Kaufmann SADOM (905820290)</option>
               <option value="KAUFMANN_VEHICULOS">Kaufmann SA Vehículos Motorizados (910912798)</option>
               <option value="MOTORES_ANDES">Com. Motores de los Andes SPA (905264494)</option>
@@ -100,9 +111,9 @@
           </div>
 
           <!-- Environment Badge -->
-          <div class="flex items-center bg-purple-50 text-fedex-purple border border-purple-200 px-3 py-1.5 rounded-xl space-x-2 text-xs font-semibold">
+          <div class="hidden md:flex items-center bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-xl space-x-2 text-xs font-semibold">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>PROD / QA Active</span>
+            <span>PROD / QA Activo</span>
           </div>
         </div>
 
@@ -111,27 +122,27 @@
   </header>
 
   <!-- ================= HERO & SUMMARY BANNER ================= -->
-  <section class="bg-gradient-to-r from-fedex-purple to-fedex-purple-dark text-white py-8 px-4 sm:px-6 lg:px-8 border-b border-fedex-purple-dark">
+  <section class="bg-white border-b border-gray-200 py-6 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
       <div>
         <div class="flex items-center space-x-2 mb-2">
-          <span class="bg-fedex-orange text-white text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded tracking-wide shadow-sm">Enterprise Logistics</span>
-          <span class="text-purple-200 text-xs font-mono">SAP S/4HANA & ERP Integration Gateway</span>
+          <span class="bg-fedex-orange text-white text-[10px] font-extrabold uppercase px-2 py-0.5 rounded tracking-wide shadow-sm">Enterprise B2B</span>
+          <span class="text-gray-500 text-xs font-mono">SAP ERP ⇄ FedEx API Gateway</span>
         </div>
-        <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">Portal de Pruebas & Integración de Servicios FedEx Dojo Chile</h1>
-        <p class="text-purple-100 text-sm max-w-2xl mt-1.5 leading-relaxed">
-          Entorno interactivo para validación de tokens OAuth 2.0, emisión con triple etiqueta (Regular + Retorno + Return Tag), trazabilidad por unidad de transporte y descarga desatendida de documentos cedibles digitalizados.
+        <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900">Portal Interactivo de Integración y Pruebas FedEx Chile</h1>
+        <p class="text-gray-600 text-xs md:text-sm max-w-3xl mt-1 leading-relaxed">
+          Validador interactivo de autenticación OAuth 2.0, emisión con triple etiqueta operativa (AWB Máster + Return AWB + Return Tag), reglas de omisión de retorno para sucursales internas, trazabilidad por unidad de transporte y visor avanzado de eventos reales de entrega.
         </p>
       </div>
 
-      <!-- Quick Active Account Card -->
-      <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 min-w-[300px] shadow-lg">
-        <div class="flex items-center justify-between text-xs text-purple-200 font-semibold mb-2">
-          <span>SOCIEDAD SELECCIONADA</span>
-          <span id="cardRut" class="font-mono text-amber-300">RUT: 96.572.360-9</span>
+      <!-- Quick Active Account Mini Card -->
+      <div class="bg-gradient-to-br from-fedex-purple to-fedex-purple-dark text-white rounded-2xl p-4 min-w-[310px] shadow-lg border border-purple-800">
+        <div class="flex items-center justify-between text-xs text-purple-200 font-semibold mb-1">
+          <span>CUENTA EN CONSOLA</span>
+          <span id="cardRut" class="font-mono text-amber-300 font-bold">RUT: 96.572.360-9</span>
         </div>
-        <div id="cardCompanyName" class="font-bold text-white text-base truncate">Comercial Kaufmann SADOM</div>
-        <div class="mt-3 grid grid-cols-2 gap-2 text-[11px] pt-3 border-t border-white/15">
+        <div id="cardCompanyName" class="font-bold text-white text-sm sm:text-base truncate">Comercial Kaufmann SADOM</div>
+        <div class="mt-3 grid grid-cols-2 gap-2 text-[11px] pt-2 border-t border-purple-500/30">
           <div>
             <span class="text-purple-300 block">N° Cuenta FedEx</span>
             <span id="cardAccountNumber" class="font-mono font-bold text-white">905820290</span>
@@ -145,50 +156,176 @@
     </div>
   </section>
 
+  <!-- ================= CREDENTIALS & KEYS VAULT SECTION ================= -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2 w-full">
+    <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+      <div class="p-5 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-gradient-to-r from-gray-50 to-white">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-fedex-purple"></span>
+            <h2 class="text-base font-bold text-gray-900">1. Credenciales y Llaves de Acceso por Cuenta EAN (Vault Oficial)</h2>
+          </div>
+          <p class="text-xs text-gray-500 mt-0.5">Parámetros oficiales provistos para Basic Auth (Token), Ship/Cancel API y Tracking API para las 3 empresas de Kaufmann.</p>
+        </div>
+        <span class="text-xs font-mono font-semibold text-fedex-purple bg-purple-50 px-3 py-1 rounded-lg border border-purple-200 w-fit">Ambiente: PRO / Beta FAPI</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-gray-100 text-gray-600 uppercase font-semibold text-[10px] tracking-wider border-b border-gray-200">
+            <tr>
+              <th class="py-3 px-4">Empresa / Razón Social</th>
+              <th class="py-3 px-3">Cuenta EAN</th>
+              <th class="py-3 px-3">OAuth Basic Auth (User / Pass)</th>
+              <th class="py-3 px-3">Ship & Cancel API (Key / Secret)</th>
+              <th class="py-3 px-3">Tracking API (Key / Secret)</th>
+              <th class="py-3 px-4 text-center">Acción</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 font-mono">
+            <!-- Row 1 -->
+            <tr id="row-COMERCIAL_KAUFMANN" class="hover:bg-purple-50/50 transition-colors bg-purple-50/30">
+              <td class="py-3.5 px-4 font-sans font-semibold text-gray-800">
+                <div class="flex items-center space-x-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  <span>Comercial Kaufmann SADOM</span>
+                </div>
+                <span class="text-[10px] text-gray-400 font-mono block ml-4">RUT: 96.572.360-9</span>
+              </td>
+              <td class="py-3.5 px-3 font-bold text-fedex-purple">905820290</td>
+              <td class="py-3.5 px-3">
+                <div class="text-[11px]"><span class="text-gray-400">U:</span> HMplqZiKBL4aMjFhqe5XP6tR</div>
+                <div class="text-[11px] text-gray-500"><span class="text-gray-400">P:</span> PHTHVVouUv1pab1dJhrKUFhfUA</div>
+              </td>
+              <td class="py-3.5 px-3">
+                <div class="text-[11px] text-gray-700 truncate max-w-[180px]" title="l7018e70dca23444a2934500414ac7bc1d"><span class="text-gray-400">K:</span> l7018e70dca23444a29...</div>
+                <div class="text-[11px] text-gray-500 truncate max-w-[180px]" title="2d1a949dda914f948417d7806f5af23c"><span class="text-gray-400">S:</span> 2d1a949dda914f9484...</div>
+              </td>
+              <td class="py-3.5 px-3">
+                <div class="text-[11px] text-gray-700 truncate max-w-[180px]" title="l7655abb26c9354a279de01f40a5e1a679"><span class="text-gray-400">K:</span> l7655abb26c9354a27...</div>
+                <div class="text-[11px] text-gray-500 truncate max-w-[180px]" title="a3a9d2ab74ab40cab8badb76212a8781"><span class="text-gray-400">S:</span> a3a9d2ab74ab40cab8...</div>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="selectAndCopyAccount('COMERCIAL_KAUFMANN')" class="bg-white hover:bg-fedex-purple hover:text-white border border-gray-300 text-gray-700 font-sans font-semibold text-[11px] px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center space-x-1 mx-auto">
+                  <i class="fa-regular fa-copy"></i>
+                  <span>Cargar y Copiar</span>
+                </button>
+              </td>
+            </tr>
+            <!-- Row 2 -->
+            <tr id="row-KAUFMANN_VEHICULOS" class="hover:bg-purple-50/50 transition-colors">
+              <td class="py-3.5 px-4 font-sans font-semibold text-gray-800">
+                <div class="flex items-center space-x-2">
+                  <span class="w-2 h-2 rounded-full bg-gray-300"></span>
+                  <span>Kaufmann SA Vehículos Motorizados</span>
+                </div>
+                <span class="text-[10px] text-gray-400 font-mono block ml-4">RUT: 92.475.000-6</span>
+              </td>
+              <td class="py-3.5 px-3 font-bold text-fedex-purple">910912798</td>
+              <td class="py-3.5 px-3">
+                <div class="text-[11px]"><span class="text-gray-400">U:</span> TKrjmKlSl0Tb7aELZFh4QBLn</div>
+                <div class="text-[11px] text-gray-500"><span class="text-gray-400">P:</span> QianjBOomk1JFp4X9SOylhWynu</div>
+              </td>
+              <td class="py-3.5 px-3">
+                <div class="text-[11px] text-gray-700 truncate max-w-[180px]" title="l7d7909ce8a6724bad9426a1c4a218d6db"><span class="text-gray-400">K:</span> l7d7909ce8a6724bad9...</div>
+                <div class="text-[11px] text-gray-500 truncate max-w-[180px]" title="2a9c61e47f0e4cd7bd1f0ee64afc2aee"><span class="text-gray-400">S:</span> 2a9c61e47f0e4cd7bd...</div>
+              </td>
+              <td class="py-3.5 px-3">
+                <div class="text-[11px] text-gray-400 italic">Hereda Track Hub Corporativo</div>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="selectAndCopyAccount('KAUFMANN_VEHICULOS')" class="bg-white hover:bg-fedex-purple hover:text-white border border-gray-300 text-gray-700 font-sans font-semibold text-[11px] px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center space-x-1 mx-auto">
+                  <i class="fa-regular fa-copy"></i>
+                  <span>Cargar y Copiar</span>
+                </button>
+              </td>
+            </tr>
+            <!-- Row 3 -->
+            <tr id="row-MOTORES_ANDES" class="hover:bg-purple-50/50 transition-colors">
+              <td class="py-3.5 px-4 font-sans font-semibold text-gray-800">
+                <div class="flex items-center space-x-2">
+                  <span class="w-2 h-2 rounded-full bg-gray-300"></span>
+                  <span>Com. Motores de los Andes SPA</span>
+                </div>
+                <span class="text-[10px] text-gray-400 font-mono block ml-4">RUT: 76.005.909-9</span>
+              </td>
+              <td class="py-3.5 px-3 font-bold text-fedex-purple">905264494</td>
+              <td class="py-3.5 px-3">
+                <div class="text-[11px]"><span class="text-gray-400">U:</span> 0jLqYcG4IBGdwjciWoqma78T</div>
+                <div class="text-[11px] text-gray-500"><span class="text-gray-400">P:</span> IwxxC5CuKw67cfUXLLl7rUyilX</div>
+              </td>
+              <td class="py-3.5 px-3">
+                <div class="text-[11px] text-gray-700 truncate max-w-[180px]" title="l70f3adee13957447ba070f6f7cae17de7"><span class="text-gray-400">K:</span> l70f3adee13957447b...</div>
+                <div class="text-[11px] text-gray-500 truncate max-w-[180px]" title="4a4d4cf2d90e4a6783e61a50df3c6b61"><span class="text-gray-400">S:</span> 4a4d4cf2d90e4a6783...</div>
+              </td>
+              <td class="py-3.5 px-3">
+                <div class="text-[11px] text-gray-400 italic">Hereda Track Hub Corporativo</div>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="selectAndCopyAccount('MOTORES_ANDES')" class="bg-white hover:bg-fedex-purple hover:text-white border border-gray-300 text-gray-700 font-sans font-semibold text-[11px] px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center space-x-1 mx-auto">
+                  <i class="fa-regular fa-copy"></i>
+                  <span>Cargar y Copiar</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= WORKFLOW PIPELINE INTERACTIVE STEPPER ================= -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-5 z-20">
-    <div class="bg-white rounded-2xl p-4 shadow-md border border-gray-200">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 z-20">
+    <div class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-200">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-2 sm:gap-3">
         <!-- Step 1 -->
         <button onclick="switchTab('oauth')" id="step-btn-oauth" class="step-card flex items-center space-x-3 p-3 rounded-xl border-2 border-fedex-purple bg-purple-50 text-left transition-all">
-          <div class="w-9 h-9 rounded-lg bg-fedex-purple text-white flex items-center justify-center font-bold text-sm shadow">1</div>
+          <div class="w-8 h-8 rounded-lg bg-fedex-purple text-white flex items-center justify-center font-bold text-xs shadow">1</div>
           <div>
-            <div class="text-xs font-bold text-fedex-purple uppercase tracking-wider">OAuth 2.0</div>
-            <div class="text-xs font-semibold text-gray-700">Token Bearer (60m)</div>
+            <div class="text-[10px] font-bold text-fedex-purple uppercase tracking-wider">OAuth 2.0</div>
+            <div class="text-xs font-semibold text-gray-800">Token Bearer</div>
           </div>
         </button>
         <!-- Step 2 -->
         <button onclick="switchTab('ship')" id="step-btn-ship" class="step-card flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:border-fedex-purple/40 text-left transition-all">
-          <div class="w-9 h-9 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-sm">2</div>
+          <div class="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-xs">2</div>
           <div>
-            <div class="text-xs font-bold text-gray-500 uppercase tracking-wider">createShipment</div>
-            <div class="text-xs font-semibold text-gray-700">3 Etiquetas & Retorno</div>
+            <div class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Ship API</div>
+            <div class="text-xs font-semibold text-gray-800">3 Etiquetas / Reglas</div>
           </div>
         </button>
         <!-- Step 3 -->
         <button onclick="switchTab('track')" id="step-btn-track" class="step-card flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:border-fedex-purple/40 text-left transition-all">
-          <div class="w-9 h-9 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-sm">3</div>
+          <div class="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-xs">3</div>
           <div>
-            <div class="text-xs font-bold text-gray-500 uppercase tracking-wider">Tracking & POD</div>
-            <div class="text-xs font-semibold text-gray-700">AWB o Unidad Transporte</div>
+            <div class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Tracking & POD</div>
+            <div class="text-xs font-semibold text-gray-800">AWB / Transporte</div>
           </div>
         </button>
         <!-- Step 4 -->
         <button onclick="switchTab('docs')" id="step-btn-docs" class="step-card flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:border-fedex-purple/40 text-left transition-all">
-          <div class="w-9 h-9 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-sm">4</div>
+          <div class="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-xs">4</div>
           <div>
-            <div class="text-xs font-bold text-gray-500 uppercase tracking-wider">getDocuments</div>
-            <div class="text-xs font-semibold text-gray-700">Cedible Digital (PNG)</div>
+            <div class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Get Documents</div>
+            <div class="text-xs font-semibold text-gray-800">Cedible PNG</div>
+          </div>
+        </button>
+        <!-- Step 5 -->
+        <button onclick="switchTab('cancel')" id="step-btn-cancel" class="step-card flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:border-red-400 text-left transition-all">
+          <div class="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-xs">5</div>
+          <div>
+            <div class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Cancel Ship</div>
+            <div class="text-xs font-semibold text-gray-800">Anulación Guía</div>
           </div>
         </button>
       </div>
     </div>
   </section>
 
-  <!-- ================= MAIN WORKSPACE ================= -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+  <!-- ================= MAIN WORKSPACE TABS ================= -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
 
-    <!-- TAB 1: OAUTH 2.0 TOKEN -->
+    <!-- ================= TAB 1: OAUTH 2.0 TOKEN ================= -->
     <div id="tab-oauth" class="tab-content space-y-6">
       <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between pb-5 border-b border-gray-100 gap-4">
@@ -197,29 +334,28 @@
               <span class="px-2.5 py-1 bg-purple-100 text-fedex-purple font-mono font-bold text-xs rounded-md">POST</span>
               <span class="font-mono text-sm text-gray-700 font-semibold">https://ws.fedex.com/LAC/ServicesAPI/oauth/token</span>
             </div>
-            <h2 class="text-lg font-bold text-fedex-purple mt-2">1. Obtención del Token de Autorización (OAuth 2.0)</h2>
-            <p class="text-xs text-gray-500">Autenticación mediante Basic Auth empleando las credenciales de la sociedad Kaufmann seleccionada. El Bearer Token expira en 3600s.</p>
+            <h2 class="text-lg font-bold text-fedex-purple mt-2">1. Token de Autorización OAuth 2.0 (Bearer 3600s)</h2>
+            <p class="text-xs text-gray-500">Autenticación Basic Auth obligatoria antes de consumir cualquier recurso del servicio Doméstico Chile.</p>
           </div>
           <button onclick="executeOAuthSim()" class="inline-flex items-center space-x-2 bg-fedex-purple hover:bg-fedex-purple-light text-white font-semibold px-5 py-2.5 rounded-xl shadow-md transition-all text-sm">
             <i class="fa-solid fa-bolt text-amber-400"></i>
-            <span>Generar Token (Simulación)</span>
+            <span>Generar Bearer Token</span>
           </button>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-          <!-- Request Parameters -->
           <div class="space-y-4">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400">Parámetros de la Cuenta Activa</h3>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400">Parámetros Inyectados para la Cuenta Activa</h3>
             <div class="bg-gray-50 rounded-xl p-4 border border-gray-200 space-y-3">
               <div>
-                <label class="text-[11px] font-bold text-gray-500 block">UserName (Client ID Basic Auth):</label>
+                <label class="text-[11px] font-bold text-gray-500 block">UserName (Client ID):</label>
                 <div class="flex items-center mt-1">
                   <input id="oauthUsername" type="text" readonly class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono text-gray-800">
                   <button onclick="copyField('oauthUsername')" class="ml-2 text-gray-500 hover:text-fedex-purple p-2 text-sm"><i class="fa-regular fa-copy"></i></button>
                 </div>
               </div>
               <div>
-                <label class="text-[11px] font-bold text-gray-500 block">Password (Client Secret Basic Auth):</label>
+                <label class="text-[11px] font-bold text-gray-500 block">Password (Client Secret):</label>
                 <div class="flex items-center mt-1">
                   <input id="oauthPassword" type="password" readonly class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono text-gray-800">
                   <button onclick="togglePasswordVisibility('oauthPassword')" class="ml-2 text-gray-500 hover:text-fedex-purple p-2 text-sm"><i class="fa-regular fa-eye"></i></button>
@@ -227,49 +363,49 @@
                 </div>
               </div>
               <div>
-                <label class="text-[11px] font-bold text-gray-500 block">Header Authorization Generado:</label>
+                <label class="text-[11px] font-bold text-gray-500 block">Header Authorization Resultante:</label>
                 <input id="oauthHeaderAuth" type="text" readonly class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono text-fedex-purple font-semibold mt-1">
               </div>
             </div>
 
-            <!-- cURL Block -->
+            <!-- cURL Request -->
             <div class="relative">
               <div class="flex items-center justify-between text-xs font-bold text-gray-500 mb-1">
-                <span>cURL de Petición</span>
+                <span>cURL de Solicitud</span>
                 <button onclick="copyCode('oauthCurlCode')" class="text-fedex-purple hover:underline text-[11px] flex items-center space-x-1">
                   <i class="fa-regular fa-copy"></i><span>Copiar cURL</span>
                 </button>
               </div>
-              <pre id="oauthCurlCode" class="code-container p-4 rounded-xl text-xs font-mono overflow-x-auto border border-gray-800"></pre>
+              <pre id="oauthCurlCode" class="code-dark p-4 rounded-xl text-xs font-mono overflow-x-auto border border-gray-800"></pre>
             </div>
           </div>
 
-          <!-- Response Payload & Active Token Widget -->
+          <!-- Server Response & Countdown -->
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400">Respuesta Servidor OAuth</h3>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400">Respuesta Servidor OAuth 2.0</h3>
               <div id="tokenTimerBadge" class="hidden text-xs bg-emerald-100 text-emerald-800 font-mono font-bold px-2.5 py-1 rounded-full border border-emerald-300">
                 <i class="fa-regular fa-clock mr-1"></i>Vigente: <span id="tokenSecondsRemaining">3599</span>s
               </div>
             </div>
 
             <div class="relative">
-              <pre id="oauthResponseJson" class="code-container p-4 rounded-xl text-xs font-mono h-64 overflow-y-auto border border-gray-800 leading-relaxed"></pre>
+              <pre id="oauthResponseJson" class="code-dark p-4 rounded-xl text-xs font-mono h-64 overflow-y-auto border border-gray-800 leading-relaxed"></pre>
               <button onclick="copyCode('oauthResponseJson')" class="absolute top-3 right-3 text-gray-400 hover:text-white bg-gray-800 px-2.5 py-1 rounded text-[11px]">
                 <i class="fa-regular fa-copy mr-1"></i>Copiar JSON
               </button>
             </div>
 
-            <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-start space-x-2">
-              <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5"></i>
-              <span><strong>Buenas Prácticas SAP:</strong> Almacena este Bearer Token en caché en el middleware de Kaufmann. No solicites un token por cada guía individual; reutilízalo mientras los 3600s estén vigentes.</span>
+            <div class="p-3.5 bg-purple-50 rounded-xl border border-purple-200 text-xs text-fedex-purple flex items-start space-x-2">
+              <i class="fa-solid fa-circle-info text-fedex-purple mt-0.5"></i>
+              <span><strong>Recomendación Senior SAP:</strong> Almacena este token en memoria compartida o caché en el Middleware de Kaufmann. Una única autorización cubre todas las llamadas de la empresa por 60 minutos.</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- TAB 2: CREATE SHIPMENT (CREACION DE GUIA) -->
+    <!-- ================= TAB 2: CREATE SHIPMENT (CREACION DE GUIA) ================= -->
     <div id="tab-ship" class="tab-content hidden space-y-6">
       <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between pb-5 border-b border-gray-100 gap-4">
@@ -278,47 +414,44 @@
               <span class="px-2.5 py-1 bg-purple-100 text-fedex-purple font-mono font-bold text-xs rounded-md">POST</span>
               <span class="font-mono text-sm text-gray-700 font-semibold">https://ws.fedex.com/LAC/ServicesAPI/cdrm/api/fapi/createShipment</span>
             </div>
-            <h2 class="text-lg font-bold text-fedex-purple mt-2">2. Emisión de Guías B2B y Retorno de Documentos Cedibles</h2>
-            <p class="text-xs text-gray-500">Generación de despacho nacional con triple etiqueta (AWB Máster + Return AWB + Return Tag) y control de retorno documental.</p>
+            <h2 class="text-lg font-bold text-fedex-purple mt-2">2. Creación de Envío B2B y Generación de Etiquetas</h2>
+            <p class="text-xs text-gray-500">Manejo dinámico de cuentas Kaufmann, regla condicional de retorno para sucursales e inyección de referencia de Transporte.</p>
           </div>
           <button onclick="executeShipmentSim()" class="inline-flex items-center space-x-2 bg-fedex-orange hover:bg-fedex-orange-hover text-white font-semibold px-5 py-2.5 rounded-xl shadow-md transition-all text-sm">
-            <i class="fa-solid fa-paper-plane"></i>
-            <span>Simular Envío y Generar Guías</span>
+            <i class="fa-solid fa-boxes-packing"></i>
+            <span>Simular Envío & Emitir Etiquetas</span>
           </button>
         </div>
 
-        <!-- Business Rules Switch Bar -->
+        <!-- Controls & Business Rules -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 p-4 bg-gray-50 rounded-xl border border-gray-200">
           <div>
-            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Tipo de Destino (Regla de Retorno)</label>
+            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Regla de Negocio (Destino)</label>
             <select id="shipmentTypeSelect" onchange="renderShipPayload()" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-semibold text-gray-800 focus:outline-none focus:border-fedex-purple">
-              <option value="CLIENTE_EXTERNO">Cliente Externo (Activar Retorno Documental)</option>
+              <option value="CLIENTE_EXTERNO">Cliente Externo (Activar RETURN_DOCUMENTS)</option>
               <option value="SUCURSAL_INTERNA">Traslado Interno Sucursal (OMITIR Retorno)</option>
             </select>
-            <span class="text-[10px] text-gray-500 block mt-1">Los envíos inter-sucursales de Kaufmann NO deben incluir `RETURN_DOCUMENTS`.</span>
+            <span class="text-[10px] text-gray-500 block mt-1">Los envíos a sucursales Kaufmann suprimen el retorno documental.</span>
           </div>
 
           <div>
-            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Referencia Logística Principal</label>
-            <div class="flex items-center space-x-2">
-              <input id="refTransportUnit" type="text" value="CAMION-FLOTA-452" oninput="renderShipPayload()" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono text-fedex-purple font-bold">
-            </div>
-            <span class="text-[10px] text-gray-500 block mt-1">Mapea la Unidad de Transporte (patente/móvil) para trazabilidad.</span>
+            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Referencia: Unidad de Transporte</label>
+            <input id="refTransportUnit" type="text" value="CAMION-FLOTA-452" oninput="renderShipPayload()" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono font-bold text-fedex-purple">
+            <span class="text-[10px] text-gray-500 block mt-1">Permite rastreo por patente, camión o móvil de flota en Tracking API.</span>
           </div>
 
           <div>
-            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Documento Tributario a Retornar</label>
+            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Factura / Guía Tributaria</label>
             <div class="grid grid-cols-2 gap-2">
-              <input id="refInvoiceNumber" type="text" value="FAC-5001234" oninput="renderShipPayload()" class="bg-white border border-gray-300 rounded-lg py-1.5 px-2 text-xs font-mono text-gray-800">
-              <input id="refDocGuiaDespacho" type="text" value="GD-908765" oninput="renderShipPayload()" class="bg-white border border-gray-300 rounded-lg py-1.5 px-2 text-xs font-mono text-gray-800">
+              <input id="refInvoiceNumber" type="text" value="FAC-5001234" oninput="renderShipPayload()" class="bg-white border border-gray-300 rounded-lg py-1.5 px-2 text-xs font-mono text-gray-800" placeholder="Factura (CI)">
+              <input id="refDocGuiaDespacho" type="text" value="GD-908765" oninput="renderShipPayload()" class="bg-white border border-gray-300 rounded-lg py-1.5 px-2 text-xs font-mono text-gray-800" placeholder="Guía Despacho (CINV)">
             </div>
-            <span class="text-[10px] text-gray-500 block mt-1">Tipo CI (Factura) y CINV (Guía de Despacho).</span>
+            <span class="text-[10px] text-gray-500 block mt-1">Se declaran en el array `documentsToReturn`.</span>
           </div>
         </div>
 
-        <!-- Code & Label Output Workspace -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-          <!-- Live JSON Payload -->
+          <!-- Payload Editor -->
           <div class="space-y-3">
             <div class="flex items-center justify-between text-xs font-bold text-gray-500">
               <span>Payload JSON (createShipment)</span>
@@ -326,28 +459,27 @@
                 <i class="fa-regular fa-copy"></i><span>Copiar JSON</span>
               </button>
             </div>
-            <pre id="shipPayloadJson" class="code-container p-4 rounded-xl text-xs font-mono h-96 overflow-y-auto border border-gray-800 leading-relaxed"></pre>
+            <pre id="shipPayloadJson" class="code-dark p-4 rounded-xl text-xs font-mono h-[420px] overflow-y-auto border border-gray-800 leading-relaxed"></pre>
           </div>
 
-          <!-- Simulation Response & Labels -->
-          <div class="space-y-4">
+          <!-- Triple Label Visual Simulator -->
+          <div class="space-y-3">
             <div class="flex items-center justify-between text-xs font-bold text-gray-500">
-              <span>Respuesta del Servidor FedEx & Guías</span>
-              <span id="shipSuccessBadge" class="hidden bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-[11px]">200 OK - Guías Generadas</span>
+              <span>Tripleta de Etiquetas & Salida Operativa</span>
+              <span id="shipSuccessBadge" class="hidden bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-[11px]">200 OK - Guías Listas</span>
             </div>
 
-            <!-- Labels Mockup Box -->
-            <div id="shipLabelsContainer" class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-5 text-center min-h-[384px] flex flex-col justify-center items-center">
+            <div id="shipLabelsContainer" class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-4 text-center min-h-[420px] flex flex-col justify-center items-center">
               <i class="fa-solid fa-barcode text-gray-300 text-5xl mb-3"></i>
-              <p class="text-sm font-semibold text-gray-600">Presiona "Simular Envío" para emitir las guías</p>
-              <p class="text-xs text-gray-400 max-w-sm mt-1">Se generará la tripleta de etiquetas: Guía AWB Máster, Etiqueta de Retorno Documental y el Return Tag físico con casillas Recibido/Firmado.</p>
+              <p class="text-sm font-semibold text-gray-600">Presiona "Simular Envío & Emitir Etiquetas"</p>
+              <p class="text-xs text-gray-400 max-w-sm mt-1">Generará la AWB Master de transporte, la Guía de Retorno del sobre y el Return Tag para la firma y verificación en terreno.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- TAB 3: TRACKING & POD (TRAZABILIDAD) -->
+    <!-- ================= TAB 3: TRACKING & REAL DELIVERY INSPECTOR ================= -->
     <div id="tab-track" class="tab-content hidden space-y-6">
       <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between pb-5 border-b border-gray-100 gap-4">
@@ -356,8 +488,8 @@
               <span class="px-2.5 py-1 bg-purple-100 text-fedex-purple font-mono font-bold text-xs rounded-md">POST</span>
               <span class="font-mono text-sm text-gray-700 font-semibold">https://apis.fedex.com/track/v1/trackingnumbers</span>
             </div>
-            <h2 class="text-lg font-bold text-fedex-purple mt-2">3. Trazabilidad de Envíos, Unidades de Transporte y POD</h2>
-            <p class="text-xs text-gray-500">Consulta de estado por AWB Máster, Return AWB o por Referencia de Unidad de Transporte (patente/camión), además de descarga de Proof of Delivery (SPOD).</p>
+            <h2 class="text-lg font-bold text-fedex-purple mt-2">3. Trazabilidad Operativa & Visor de Entrega Real (Track API)</h2>
+            <p class="text-xs text-gray-500">Consulta por AWB, por Referencia (Unidad de Transporte / Factura) e inspección integral con eventos de escaneo, recepción y comprobante POD.</p>
           </div>
           <button onclick="executeTrackingSim()" class="inline-flex items-center space-x-2 bg-fedex-purple hover:bg-fedex-purple-light text-white font-semibold px-5 py-2.5 rounded-xl shadow-md transition-all text-sm">
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -365,18 +497,19 @@
           </button>
         </div>
 
+        <!-- Tracking Form Inputs -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Criterio de Búsqueda</label>
+            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Criterio de Rastreo</label>
             <select id="trackSearchType" onchange="toggleTrackInputs()" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-semibold text-gray-800">
-              <option value="AWB">Por Número de Guía (AWB / Return AWB)</option>
-              <option value="TRANSPORT_UNIT">Por Referencia: Unidad de Transporte (Patente)</option>
-              <option value="INVOICE">Por Referencia: Factura Kaufmann</option>
+              <option value="AWB">Por Número de Guía AWB (384403557611)</option>
+              <option value="TRANSPORT_UNIT">Por Referencia: Unidad de Transporte (Patente/Móvil)</option>
+              <option value="INVOICE">Por Referencia: Factura / PO (RD-1)</option>
             </select>
           </div>
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-            <label id="trackInputLabel" class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Número de Guía (AWB)</label>
-            <input id="trackInputValue" type="text" value="795110574638" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono font-bold text-fedex-purple">
+            <label id="trackInputLabel" class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Número de Guía (Tracking)</label>
+            <input id="trackInputValue" type="text" value="384403557611" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono font-bold text-fedex-purple">
           </div>
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
             <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Cuenta Consultora Activa</label>
@@ -384,46 +517,130 @@
           </div>
         </div>
 
-        <!-- Tracking Visual Timeline & Status -->
-        <div id="trackingResultArea" class="mt-6 border border-gray-200 rounded-xl p-6 bg-white space-y-6">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-gray-100 gap-2">
-            <div>
-              <span class="text-xs text-gray-400 font-bold uppercase">Estado de la Entrega</span>
-              <div class="flex items-center space-x-3 mt-1">
-                <span id="trackStatusBadge" class="bg-emerald-100 text-emerald-800 font-bold text-sm px-3 py-1 rounded-full border border-emerald-300">DELIVERED (Entregado)</span>
-                <span id="trackAWBDisplay" class="font-mono text-xs text-gray-600 font-semibold">AWB: 795110574638</span>
-                <span id="trackUnitDisplay" class="font-mono text-xs bg-purple-50 text-fedex-purple px-2 py-0.5 rounded border border-purple-200">UNIDAD: CAMION-FLOTA-452</span>
+        <!-- REAL RESPONSE VISUAL INSPECTOR -->
+        <div class="mt-6 border border-gray-200 rounded-2xl p-6 bg-white space-y-6">
+          <!-- Summary Header -->
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between pb-5 border-b border-gray-200 gap-4">
+            <div class="space-y-1">
+              <div class="flex items-center space-x-3">
+                <span class="bg-emerald-100 text-emerald-800 font-extrabold text-xs px-3 py-1 rounded-full border border-emerald-300 flex items-center space-x-1.5">
+                  <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                  <span>ENTREGADO (DL)</span>
+                </span>
+                <span class="text-xs text-gray-500 font-medium">Carrier: <strong class="font-mono text-gray-800">FDXE</strong></span>
+                <span class="text-xs text-gray-500 font-medium">Servicio: <strong class="text-fedex-purple">FedEx Nacional Prioritario (NP)</strong></span>
+              </div>
+              <div class="text-sm font-semibold text-gray-800 pt-1">
+                Entregado a: <span class="font-bold text-gray-900">F.MENA</span> (Recepcionista / Mesa de entrada) en Viña del Mar, Chile
+              </div>
+              <div class="text-xs text-gray-500">
+                Fecha efectiva: <strong>02 Nov 2026 a las 09:31 hrs</strong> (Original Recogido: 30 Oct 2026, 11:11 hrs en Santiago)
               </div>
             </div>
-            <button onclick="downloadMockPOD()" class="inline-flex items-center space-x-2 text-xs font-bold text-fedex-purple hover:text-fedex-orange bg-purple-50 hover:bg-orange-50 border border-purple-200 hover:border-orange-300 px-4 py-2 rounded-lg transition-all">
-              <i class="fa-solid fa-file-pdf text-red-500 text-sm"></i>
+
+            <!-- POD Download Button -->
+            <button onclick="downloadMockPOD()" class="inline-flex items-center space-x-2 text-xs font-bold text-fedex-purple hover:text-fedex-orange bg-purple-50 hover:bg-orange-50 border border-purple-200 hover:border-orange-300 px-4 py-2.5 rounded-xl transition-all shadow-sm w-fit">
+              <i class="fa-solid fa-file-pdf text-red-500 text-base"></i>
               <span>Descargar Comprobante POD (PDF)</span>
             </button>
           </div>
 
-          <!-- Timeline -->
-          <div class="relative pl-6 space-y-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-fedex-purple/30">
-            <div class="relative">
-              <span class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-500 ring-4 ring-emerald-100"></span>
-              <div class="text-xs font-bold text-gray-800">ENTREGA EXITOSA & FIRMA DE CEDIBLE DESTINO</div>
-              <div class="text-[11px] text-gray-500">11 Nov 2026, 11:45 hrs — Concepción, Chile (Firmado por: M. Lillo Díaz)</div>
+          <!-- Key Metrics Grid based on real response -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+            <div class="bg-gray-50 p-3 rounded-xl border border-gray-200">
+              <span class="text-gray-400 block text-[10px] uppercase font-bold">Identificadores de Paquete</span>
+              <span class="font-mono font-bold text-gray-800 block mt-0.5">MPS: 384403557611</span>
+              <span class="font-mono text-[10px] text-gray-500 block">PO: RD - 1 | Ref: 7555440169</span>
             </div>
-            <div class="relative">
-              <span class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-fedex-purple"></span>
-              <div class="text-xs font-bold text-gray-800">EN TRÁNSITO / DISTRIBUCIÓN LOCAL</div>
-              <div class="text-[11px] text-gray-500">11 Nov 2026, 08:30 hrs — Móvil de reparto asignado (Concepción Hub)</div>
+            <div class="bg-gray-50 p-3 rounded-xl border border-gray-200">
+              <span class="text-gray-400 block text-[10px] uppercase font-bold">Peso y Piezas</span>
+              <span class="font-mono font-bold text-gray-800 block mt-0.5">25.0 KG (55.12 LB)</span>
+              <span class="text-[10px] text-gray-500 block">Pieza 1 de 2 | Total: 50.0 KG</span>
             </div>
-            <div class="relative">
-              <span class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-fedex-purple"></span>
-              <div class="text-xs font-bold text-gray-800">RETIRO Y RECEPCIÓN EN BODEGA CENTRAL KAUFMANN</div>
-              <div class="text-[11px] text-gray-500">10 Nov 2026, 17:20 hrs — Pudahuel, Santiago (Carrier: FDXE)</div>
+            <div class="bg-gray-50 p-3 rounded-xl border border-gray-200">
+              <span class="text-gray-400 block text-[10px] uppercase font-bold">Dimensiones Bulto</span>
+              <span class="font-mono font-bold text-gray-800 block mt-0.5">50 x 50 x 60 CM</span>
+              <span class="text-[10px] text-gray-500 block">Empaque: YOUR_PACKAGING</span>
+            </div>
+            <div class="bg-gray-50 p-3 rounded-xl border border-gray-200">
+              <span class="text-gray-400 block text-[10px] uppercase font-bold">Retorno Vinculado</span>
+              <span class="font-mono font-bold text-fedex-purple block mt-0.5">OUTBOUND_LINK_TO_RETURN</span>
+              <span class="text-[10px] text-emerald-600 font-semibold block">Retorno Activo en Pouch</span>
+            </div>
+          </div>
+
+          <!-- Timeline & Full JSON Columns -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
+            <!-- Scan Events Timeline -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500 flex items-center justify-between">
+                <span>Historial Completo de Eventos de Escaneo (Scan Events)</span>
+                <span class="text-[10px] font-normal text-gray-400">7 eventos registrados</span>
+              </h4>
+
+              <div class="space-y-5 pl-2">
+                <!-- Event 1 (DL) -->
+                <div class="relative pl-7 timeline-node">
+                  <span class="absolute left-1.5 top-1 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-4 ring-emerald-100"></span>
+                  <div class="text-xs font-bold text-gray-900">Entregado (DL) — F.MENA</div>
+                  <div class="text-[11px] text-gray-500">02 Nov 2026, 09:31 hrs — Viña del Mar, VA (Recepción/Mesa Entrada)</div>
+                </div>
+                <!-- Event 2 (OD) -->
+                <div class="relative pl-7 timeline-node">
+                  <span class="absolute left-1.5 top-1 w-3.5 h-3.5 rounded-full bg-fedex-purple"></span>
+                  <div class="text-xs font-bold text-gray-900">En vehículo de FedEx para entregar (OD)</div>
+                  <div class="text-[11px] text-gray-500">02 Nov 2026, 07:42 hrs — Viña del Mar, VA (Móvil VAPA)</div>
+                </div>
+                <!-- Event 3 (AR) -->
+                <div class="relative pl-7 timeline-node">
+                  <span class="absolute left-1.5 top-1 w-3.5 h-3.5 rounded-full bg-fedex-purple"></span>
+                  <div class="text-xs font-bold text-gray-900">En oficina local de FedEx (AR)</div>
+                  <div class="text-[11px] text-gray-500">02 Nov 2026, 05:33 hrs — Viña del Mar Facility</div>
+                </div>
+                <!-- Event 4 (DP) -->
+                <div class="relative pl-7 timeline-node">
+                  <span class="absolute left-1.5 top-1 w-3.5 h-3.5 rounded-full bg-gray-400"></span>
+                  <div class="text-xs font-bold text-gray-900">Salió del centro de distribución FedEx (DP)</div>
+                  <div class="text-[11px] text-gray-500">30 Oct 2026, 19:10 hrs — San Bernardo Hub (SCLH)</div>
+                </div>
+                <!-- Event 5 (IT) -->
+                <div class="relative pl-7 timeline-node">
+                  <span class="absolute left-1.5 top-1 w-3.5 h-3.5 rounded-full bg-gray-400"></span>
+                  <div class="text-xs font-bold text-gray-900">En camino / Procesamiento (IT)</div>
+                  <div class="text-[11px] text-gray-500">30 Oct 2026, 13:56 hrs — San Bernardo Facility</div>
+                </div>
+                <!-- Event 6 (PU) -->
+                <div class="relative pl-7 timeline-node">
+                  <span class="absolute left-1.5 top-1 w-3.5 h-3.5 rounded-full bg-gray-400"></span>
+                  <div class="text-xs font-bold text-gray-900">Recogido en origen Kaufmann (PU)</div>
+                  <div class="text-[11px] text-gray-500">30 Oct 2026, 11:11 hrs — Santiago, RM (SCLY)</div>
+                </div>
+                <!-- Event 7 (OC) -->
+                <div class="relative pl-7 timeline-node">
+                  <span class="absolute left-1.5 top-1 w-3.5 h-3.5 rounded-full bg-gray-400"></span>
+                  <div class="text-xs font-bold text-gray-900">Información del envío enviada a FedEx (OC)</div>
+                  <div class="text-[11px] text-gray-500">30 Oct 2026, 08:34 hrs — Etiqueta creada en SAP</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Raw JSON Response with Collapse -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs font-bold text-gray-500">
+                <span>Respuesta Completa de FedEx Track API</span>
+                <button onclick="copyCode('trackFullJsonResponse')" class="text-fedex-purple hover:underline text-[11px] flex items-center space-x-1">
+                  <i class="fa-regular fa-copy"></i><span>Copiar JSON</span>
+                </button>
+              </div>
+              <pre id="trackFullJsonResponse" class="code-dark p-4 rounded-xl text-xs font-mono h-[380px] overflow-y-auto border border-gray-800 leading-relaxed"></pre>
             </div>
           </div>
         </div>
+
       </div>
     </div>
 
-    <!-- TAB 4: GET DOCUMENTS (DESCARGA DE CEDIBLE DIGITALIZADO) -->
+    <!-- ================= TAB 4: GET DOCUMENTS (CEDIBLE DIGITALIZADO) ================= -->
     <div id="tab-docs" class="tab-content hidden space-y-6">
       <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between pb-5 border-b border-gray-100 gap-4">
@@ -433,33 +650,32 @@
               <span class="font-mono text-sm text-gray-700 font-semibold">https://ws.fedex.com/LAC/ServicesAPI/cdrm/api/docs/getDocuments</span>
             </div>
             <h2 class="text-lg font-bold text-fedex-purple mt-2">4. Descarga de Documento Cedible Digitalizado (Get Document API)</h2>
-            <p class="text-xs text-gray-500">Recuperación del documento tributario firmado (Factura/Guía) en formato PNG Base64 mediante el AWB de transporte.</p>
+            <p class="text-xs text-gray-500">Recuperación desatendida del cedible timbrado/firmado en destino una vez alcanzado el estado SCANED.</p>
           </div>
           <button onclick="executeGetDocsSim()" class="inline-flex items-center space-x-2 bg-fedex-purple hover:bg-fedex-purple-light text-white font-semibold px-5 py-2.5 rounded-xl shadow-md transition-all text-sm">
             <i class="fa-solid fa-cloud-arrow-down"></i>
-            <span>Consultar y Descargar Cedible</span>
+            <span>Descargar Cedible (Base64)</span>
           </button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Criterio de Búsqueda (searchType)</label>
+            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Criterio (searchType)</label>
             <select id="docSearchType" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-semibold text-gray-800">
               <option value="AWB">AWB (Número de Guía Original)</option>
               <option value="DOC_REF">DOC_REF (Referencia del Documento)</option>
             </select>
           </div>
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Valor de Búsqueda (AWB o Factura)</label>
-            <input id="docSearchValue" type="text" value="795110574638" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono font-bold text-fedex-purple">
+            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Valor de Búsqueda</label>
+            <input id="docSearchValue" type="text" value="384403557611" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono font-bold text-fedex-purple">
           </div>
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Cuenta Asociada</label>
+            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Cuenta Pagadora</label>
             <input id="docAccountBadge" type="text" readonly class="w-full bg-gray-100 border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono text-gray-700">
           </div>
         </div>
 
-        <!-- Document Viewer and JSON response -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
           <!-- JSON Response -->
           <div class="space-y-3">
@@ -469,18 +685,17 @@
                 <i class="fa-regular fa-copy"></i><span>Copiar JSON</span>
               </button>
             </div>
-            <pre id="docsResponseJson" class="code-container p-4 rounded-xl text-xs font-mono h-[420px] overflow-y-auto border border-gray-800 leading-relaxed"></pre>
+            <pre id="docsResponseJson" class="code-dark p-4 rounded-xl text-xs font-mono h-[420px] overflow-y-auto border border-gray-800 leading-relaxed"></pre>
           </div>
 
           <!-- Document Render Mockup -->
           <div class="space-y-3">
             <div class="flex items-center justify-between text-xs font-bold text-gray-500">
-              <span>Vista Previa del Cedible Recuperado (PNG Base64)</span>
-              <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-300">Digitalización Verificada</span>
+              <span>Vista Previa del Cedible Recuperado (Decodificado de Base64)</span>
+              <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-300">Status: SCANED</span>
             </div>
             <div class="bg-gray-100 rounded-xl p-4 border border-gray-300 flex flex-col items-center justify-center min-h-[420px]">
               <div class="bg-white p-5 rounded-lg shadow-lg border border-gray-300 max-w-sm w-full font-mono text-[10px] space-y-3 relative overflow-hidden">
-                <!-- Watermark Stamp -->
                 <div class="absolute -right-6 top-8 transform rotate-12 border-2 border-emerald-600 text-emerald-700 font-black text-xs px-4 py-1 rounded select-none opacity-80">
                   SCANED & DIGITALIZED
                 </div>
@@ -490,18 +705,17 @@
                   <div class="text-gray-500 font-bold">R.U.T.: 96.572.360-9 — N° 005001234</div>
                 </div>
                 <div class="space-y-1 text-gray-600">
-                  <div><strong>Destinatario:</strong> Talleres Concepción SpA</div>
+                  <div><strong>Destinatario:</strong> Talleres y Flota Viña del Mar SpA</div>
                   <div><strong>RUT:</strong> 76.123.456-7</div>
                   <div><strong>Pouch ID:</strong> <span class="text-fedex-purple font-bold">eddff0f4</span></div>
                 </div>
                 <div class="border-t border-b border-gray-200 py-2">
                   <div class="flex justify-between"><span>Repuestos Motor Mercedes-Benz</span><span>$ 1.850.000</span></div>
                 </div>
-                <!-- Signature Area -->
                 <div class="pt-3 border-t-2 border-dashed border-gray-300 text-center">
-                  <div class="font-serif italic text-base text-blue-900 select-none">M. Lillo Díaz</div>
+                  <div class="font-serif italic text-base text-blue-900 select-none">F. MENA</div>
                   <div class="text-[9px] text-gray-500 uppercase">Recibí Conforme / Firma y Timbre Cedible</div>
-                  <div class="text-[8px] text-gray-400 mt-0.5">Fecha: 11-11-2026 | AWB: 795110574638</div>
+                  <div class="text-[8px] text-gray-400 mt-0.5">Fecha: 02-11-2026 | AWB: 384403557611</div>
                 </div>
               </div>
             </div>
@@ -511,7 +725,7 @@
       </div>
     </div>
 
-    <!-- TAB 5: CANCEL SHIPMENT (CANCELACION) -->
+    <!-- ================= TAB 5: CANCEL SHIPMENT ================= -->
     <div id="tab-cancel" class="tab-content hidden space-y-6">
       <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between pb-5 border-b border-gray-100 gap-4">
@@ -521,7 +735,7 @@
               <span class="font-mono text-sm text-gray-700 font-semibold">https://ws.fedex.com/LAC/ServicesAPI/cdrm/api/fapi/cancelShipment</span>
             </div>
             <h2 class="text-lg font-bold text-fedex-purple mt-2">5. Cancelación y Anulación de Guías FedEx</h2>
-            <p class="text-xs text-gray-500">Elimina el despacho a nivel de guía máster (y todas sus MPS multipiezas) para evitar cobros si la orden se cancela en SAP antes de la recolección.</p>
+            <p class="text-xs text-gray-500">Elimina el despacho a nivel de guía máster (y todas sus MPS multipiezas) para evitar cobros si la orden se cancela en SAP antes de la recolección física.</p>
           </div>
           <button onclick="executeCancelSim()" class="inline-flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md transition-all text-sm">
             <i class="fa-solid fa-ban"></i>
@@ -537,12 +751,12 @@
             </div>
             <div>
               <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Payload JSON de Cancelación</label>
-              <pre id="cancelPayloadJson" class="code-container p-4 rounded-xl text-xs font-mono h-48 overflow-y-auto border border-gray-800 leading-relaxed"></pre>
+              <pre id="cancelPayloadJson" class="code-dark p-4 rounded-xl text-xs font-mono h-48 overflow-y-auto border border-gray-800 leading-relaxed"></pre>
             </div>
           </div>
           <div class="space-y-4">
             <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Respuesta del Servidor FedEx</label>
-            <pre id="cancelResponseJson" class="code-container p-4 rounded-xl text-xs font-mono h-60 overflow-y-auto border border-gray-800 leading-relaxed"></pre>
+            <pre id="cancelResponseJson" class="code-dark p-4 rounded-xl text-xs font-mono h-60 overflow-y-auto border border-gray-800 leading-relaxed"></pre>
           </div>
         </div>
       </div>
@@ -577,10 +791,10 @@
     </div>
   </nav>
 
-  <!-- ================= LOGIC & REAL-TIME DATA ENGINE ================= -->
+  <!-- ================= JAVASCRIPT LOGIC ENGINE ================= -->
   <script>
     // -------------------------------------------------------------
-    // 1. DATA DICTIONARY: 3 KAUFMANN CORPORATE ENTITIES
+    // DATA DICTIONARY: 3 KAUFMANN CORPORATE ENTITIES
     // -------------------------------------------------------------
     const COMPANIES_DATA = {
       COMERCIAL_KAUFMANN: {
@@ -618,61 +832,164 @@
       }
     };
 
+    // REAL FEDEX TRACKING DELIVERY RESPONSE (AS PROVIDED)
+    const REAL_TRACKING_RESPONSE = {
+      "transactionId": "38d775c9-8a24-4997-b7dc-e70908815cbd",
+      "output": {
+        "completeTrackResults": [
+          {
+            "trackingNumber": "384403557611",
+            "trackResults": [
+              {
+                "trackingNumberInfo": {
+                  "trackingNumber": "384403557611",
+                  "trackingNumberUniqueId": "2461344000~384403557611~FX",
+                  "carrierCode": "FDXE"
+                },
+                "additionalTrackingInfo": {
+                  "nickname": "",
+                  "packageIdentifiers": [
+                    { "type": "STANDARD_MPS", "values": ["384403557611"], "trackingNumberUniqueId": "2461344000", "carrierCode": "" },
+                    { "type": "PURCHASE_ORDER", "values": ["RD - 1"], "trackingNumberUniqueId": "", "carrierCode": "" },
+                    { "type": "OUTBOUND_LINK_TO_RETURN", "values": ["384403557611"], "trackingNumberUniqueId": "2461344000", "carrierCode": "" },
+                    { "type": "SHIPPER_REFERENCE", "values": ["7555440169"], "trackingNumberUniqueId": "", "carrierCode": "" }
+                  ],
+                  "hasAssociatedShipments": true
+                },
+                "shipperInformation": {
+                  "contact": {},
+                  "address": { "city": "VITACURA", "stateOrProvinceCode": "RM", "countryCode": "CL", "residential": false, "countryName": "Chile" }
+                },
+                "recipientInformation": {
+                  "contact": {},
+                  "address": { "city": "vina del mar", "stateOrProvinceCode": "VA", "countryCode": "CL", "residential": false, "countryName": "Chile" }
+                },
+                "latestStatusDetail": {
+                  "code": "DL",
+                  "derivedCode": "DL",
+                  "statusByLocale": "Entregado",
+                  "description": "Entregado",
+                  "scanLocation": { "city": "vina del mar", "stateOrProvinceCode": "VA", "countryCode": "CL", "residential": false, "countryName": "Chile" }
+                },
+                "dateAndTimes": [
+                  { "type": "ACTUAL_DELIVERY", "dateTime": "2026-11-02T09:31:00-03:00" },
+                  { "type": "ACTUAL_PICKUP", "dateTime": "2026-10-30T11:11:00-03:00" },
+                  { "type": "SHIP", "dateTime": "2026-10-30T00:00:00+00:00" },
+                  { "type": "ACTUAL_TENDER", "dateTime": "2026-10-30T11:21:00-03:00" }
+                ],
+                "availableImages": [ { "type": "SIGNATURE_PROOF_OF_DELIVERY" } ],
+                "packageDetails": {
+                  "packagingDescription": { "type": "YOUR_PACKAGING", "description": "Your Packaging" },
+                  "sequenceNumber": "1",
+                  "count": "2",
+                  "weightAndDimensions": {
+                    "weight": [
+                      { "value": "25.0", "unit": "KG" },
+                      { "value": "55.12", "unit": "LB" }
+                    ],
+                    "dimensions": [
+                      { "length": 50, "width": 50, "height": 60, "units": "CM" },
+                      { "length": 19, "width": 19, "height": 23, "units": "IN" }
+                    ]
+                  }
+                },
+                "shipmentDetails": {
+                  "possessionStatus": true,
+                  "weight": [
+                    { "value": "50.0", "unit": "KG" },
+                    { "value": "110.23", "unit": "LB" }
+                  ]
+                },
+                "deliveryDetails": {
+                  "actualDeliveryAddress": { "city": "vina del mar", "stateOrProvinceCode": "VA", "countryCode": "CL", "residential": false, "countryName": "Chile" },
+                  "locationType": "RECEPTIONIST_OR_FRONT_DESK",
+                  "locationDescription": "Recepcionista/mesa de entrada",
+                  "deliveryAttempts": "0",
+                  "receivedByName": "F.MENA"
+                },
+                "serviceDetail": {
+                  "type": "FEDEX_PRIORITY",
+                  "description": "FedEx Nacional Prioritario",
+                  "shortDescription": "NP"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    };
+
     let currentCompanyKey = "COMERCIAL_KAUFMANN";
     let tokenCountdownInterval = null;
     let secondsLeft = 3599;
 
-    // -------------------------------------------------------------
-    // 2. INITIALIZATION
-    // -------------------------------------------------------------
     window.onload = function() {
       applyCompanyData();
       renderOAuthPayloads();
       renderShipPayload();
       renderCancelPayload();
+      document.getElementById('trackFullJsonResponse').textContent = JSON.stringify(REAL_TRACKING_RESPONSE, null, 2);
     };
 
-    // -------------------------------------------------------------
-    // 3. COMPANY SWITCHER DISPATCHER
-    // -------------------------------------------------------------
     function onCompanyChange(key) {
       currentCompanyKey = key;
       applyCompanyData();
       renderOAuthPayloads();
       renderShipPayload();
       renderCancelPayload();
-      showToast(`Cambiado a: ${COMPANIES_DATA[key].name}`);
+      highlightActiveTableRow(key);
+      showToast(`Cargada: ${COMPANIES_DATA[key].name}`);
+    }
+
+    function selectAndCopyAccount(key) {
+      document.getElementById('companySelect').value = key;
+      onCompanyChange(key);
+      const data = COMPANIES_DATA[key];
+      const clipboardText = `Cuenta: ${data.accountNumber}\nUserName: ${data.oauthUser}\nPassword: ${data.oauthPass}\nShip Key: ${data.shipClientId}\nShip Secret: ${data.shipClientSecret}`;
+      const dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = clipboardText;
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+      showToast(`Credenciales de ${data.name.split(' ')[0]} copiadas`);
+    }
+
+    function highlightActiveTableRow(key) {
+      ['COMERCIAL_KAUFMANN', 'KAUFMANN_VEHICULOS', 'MOTORES_ANDES'].forEach(k => {
+        const row = document.getElementById(`row-${k}`);
+        if (!row) return;
+        if (k === key) {
+          row.className = "hover:bg-purple-50/50 transition-colors bg-purple-50/40 border-l-4 border-fedex-purple";
+        } else {
+          row.className = "hover:bg-purple-50/50 transition-colors";
+        }
+      });
     }
 
     function applyCompanyData() {
       const data = COMPANIES_DATA[currentCompanyKey];
 
-      // Update Header & Summary
       document.getElementById('headerAccountBadge').innerText = `CTA: ${data.accountNumber}`;
       document.getElementById('cardCompanyName').innerText = data.name;
       document.getElementById('cardRut').innerText = `RUT: ${data.rut}`;
       document.getElementById('cardAccountNumber').innerText = data.accountNumber;
 
-      // Update OAuth Module
       document.getElementById('oauthUsername').value = data.oauthUser;
       document.getElementById('oauthPassword').value = data.oauthPass;
       const basicAuthBase64 = btoa(`${data.oauthUser}:${data.oauthPass}`);
       document.getElementById('oauthHeaderAuth').value = `Basic ${basicAuthBase64}`;
 
-      // Update Badges across modules
       document.getElementById('trackAccountBadge').value = `${data.accountNumber} (${data.name.split(' ')[0]})`;
       document.getElementById('docAccountBadge').value = `${data.accountNumber} (${data.name.split(' ')[0]})`;
+      highlightActiveTableRow(currentCompanyKey);
     }
 
-    // -------------------------------------------------------------
-    // 4. TAB CONTROLLER
-    // -------------------------------------------------------------
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       const activeTab = document.getElementById(`tab-${tabId}`);
       if (activeTab) activeTab.classList.remove('hidden');
 
-      // Update Nav buttons
       document.querySelectorAll('.nav-tab-btn').forEach(btn => {
         if (btn.getAttribute('data-tab') === tabId) {
           btn.className = "nav-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-fedex-purple bg-purple-50 shadow-sm";
@@ -681,24 +998,20 @@
         }
       });
 
-      // Update Pipeline Stepper buttons
-      ['oauth', 'ship', 'track', 'docs'].forEach(step => {
+      ['oauth', 'ship', 'track', 'docs', 'cancel'].forEach(step => {
         const btn = document.getElementById(`step-btn-${step}`);
         if (!btn) return;
         const numberBox = btn.querySelector('div:first-child');
         if (step === tabId) {
           btn.className = "step-card flex items-center space-x-3 p-3 rounded-xl border-2 border-fedex-purple bg-purple-50 text-left transition-all shadow-sm";
-          numberBox.className = "w-9 h-9 rounded-lg bg-fedex-purple text-white flex items-center justify-center font-bold text-sm shadow";
+          numberBox.className = "w-8 h-8 rounded-lg bg-fedex-purple text-white flex items-center justify-center font-bold text-xs shadow";
         } else {
           btn.className = "step-card flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:border-fedex-purple/40 text-left transition-all";
-          numberBox.className = "w-9 h-9 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-sm";
+          numberBox.className = "w-8 h-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-xs";
         }
       });
     }
 
-    // -------------------------------------------------------------
-    // 5. OAUTH MODULE LOGIC
-    // -------------------------------------------------------------
     function renderOAuthPayloads() {
       const data = COMPANIES_DATA[currentCompanyKey];
       const basicAuthBase64 = btoa(`${data.oauthUser}:${data.oauthPass}`);
@@ -712,7 +1025,7 @@
       document.getElementById('oauthCurlCode').textContent = curlText;
 
       const mockResponse = {
-        "access_token": `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.${btoa(data.accountNumber)}.simulated_fedex_token_${Date.now()}`,
+        "access_token": `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.${btoa(data.accountNumber)}.fedex_token_${Date.now()}`,
         "token_type": "bearer",
         "expires_in": 3599,
         "scope": "read write delete",
@@ -734,12 +1047,9 @@
         if (secondsLeft <= 0) clearInterval(tokenCountdownInterval);
       }, 1000);
 
-      showToast("Token OAuth 2.0 generado con éxito (3600s)");
+      showToast("Token Bearer generado con éxito");
     }
 
-    // -------------------------------------------------------------
-    // 6. CREATE SHIPMENT LOGIC (CONDITIONAL RETURN DOCUMENTS)
-    // -------------------------------------------------------------
     function renderShipPayload() {
       const data = COMPANIES_DATA[currentCompanyKey];
       const destinationType = document.getElementById('shipmentTypeSelect').value;
@@ -800,13 +1110,12 @@
         "requestedPackageLineItems": [
           {
             "itemDescription": "Repuestos de Camiones y Buses",
-            "weight": { "value": 14.8, "units": "KG" },
-            "dimensions": { "length": 45, "width": 30, "height": 25, "units": "CM" }
+            "weight": { "value": 25.0, "units": "KG" },
+            "dimensions": { "length": 50, "width": 50, "height": 60, "units": "CM" }
           }
         ]
       };
 
-      // CONDITIONAL BUSINESS RULE: Exclude return documents for internal branches
       if (destinationType === "CLIENTE_EXTERNO") {
         payload.specialServicesRequested = {
           "specialServiceTypes": ["RETURN_DOCUMENTS"],
@@ -818,11 +1127,10 @@
         };
       }
 
-      // References including Transport Unit (Patente)
       payload.references = [
         { "customerReferenceType": "CUSTOMER_REFERENCE", "value": transportUnit },
         { "customerReferenceType": "INVOICE", "value": invoiceNum },
-        { "customerReferenceType": "PURCHACE_ORDER", "value": "OC-KAUF-8812" },
+        { "customerReferenceType": "PURCHACE_ORDER", "value": "RD - 1" },
         { "customerReferenceType": "DEPARTMENT_NUMBER", "value": "TALLER-ZONA-SUR" }
       ];
 
@@ -839,18 +1147,17 @@
       const transportUnit = document.getElementById('refTransportUnit').value || "CAMION-FLOTA-452";
       const invoiceNum = document.getElementById('refInvoiceNumber').value || "FAC-5001234";
 
-      const masterAwb = "79511057" + Math.floor(1000 + Math.random() * 9000);
-      const returnAwb = "79599130" + Math.floor(1000 + Math.random() * 9000);
-      const pouchId = "eddff0" + Math.floor(10 + Math.random() * 89);
+      const masterAwb = "384403557611";
+      const returnAwb = "384403557999";
+      const pouchId = "eddff0f4";
 
       document.getElementById('shipSuccessBadge').classList.remove('hidden');
 
-      // Build Interactive Printable Labels Mock
       const labelsHtml = `
         <div class="w-full space-y-4 text-left">
           <div class="flex items-center justify-between bg-emerald-50 border border-emerald-200 p-3 rounded-lg text-xs text-emerald-900">
-            <span><strong>Respuesta de Emisión:</strong> Despacho generado exitosamente.</span>
-            <span class="font-mono font-bold">Pouch ID: ${destinationType === 'CLIENTE_EXTERNO' ? pouchId : 'N/A (Traslado Interno)'}</span>
+            <span><strong>Respuesta de Emisión:</strong> Guía procesada correctamente.</span>
+            <span class="font-mono font-bold">Pouch ID: ${destinationType === 'CLIENTE_EXTERNO' ? pouchId : 'N/A (Sin Retorno)'}</span>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -858,7 +1165,7 @@
             <div class="border-2 border-gray-800 rounded-lg p-3 bg-white font-mono text-[10px] space-y-2 shadow-sm">
               <div class="flex justify-between items-center border-b border-gray-400 pb-1">
                 <span class="font-extrabold text-xs">FedEx Express</span>
-                <span class="bg-gray-800 text-white px-1 font-bold">AWB 1/1</span>
+                <span class="bg-gray-800 text-white px-1 font-bold">AWB 1/2</span>
               </div>
               <div>
                 <span class="text-gray-400 block text-[8px]">MASTER TRACKING</span>
@@ -867,12 +1174,12 @@
               <div class="border-t border-b border-gray-200 py-1 text-[9px]">
                 <div><strong>Ref:</strong> ${transportUnit}</div>
                 <div><strong>Factura:</strong> ${invoiceNum}</div>
-                <div><strong>Peso:</strong> 14.80 KG | <strong>Dims:</strong> 45x30x25</div>
+                <div><strong>Peso:</strong> 25.0 KG | <strong>Dims:</strong> 50x50x60 CM</div>
               </div>
               <div class="text-center font-bold bg-gray-100 py-1 rounded tracking-widest text-xs">
                 |||| | |||||| || |||||
               </div>
-              <div class="text-[8px] text-gray-400 text-center uppercase">Etiqueta de Bulto Físico</div>
+              <div class="text-[8px] text-gray-400 text-center uppercase">Etiqueta Bulto Físico</div>
             </div>
 
             <!-- Label 2: Return AWB -->
@@ -887,8 +1194,8 @@
               </div>
               <div class="border-t border-b border-gray-200 py-1 text-[9px]">
                 <div><strong>Asociado AWB:</strong> ${masterAwb}</div>
-                <div><strong>Destino:</strong> Casa Central Kaufmann</div>
-                <div><strong>Servicio:</strong> Retorno Documental</div>
+                <div><strong>Destino:</strong> Central Kaufmann</div>
+                <div><strong>Servicio:</strong> Retorno Documentos</div>
               </div>
               <div class="text-center font-bold bg-orange-50 text-fedex-orange py-1 rounded tracking-widest text-xs">
                 |||| ||| |||| | |||||
@@ -915,64 +1222,50 @@
               <div class="p-1 bg-purple-50 text-[8px] text-fedex-purple rounded text-center font-semibold">
                 Verificación de Chofer y Receptor
               </div>
-              <div class="text-[8px] text-gray-400 text-center uppercase">Comprobante de Control</div>
+              <div class="text-[8px] text-gray-400 text-center uppercase">Control de Documentos</div>
             </div>
           </div>
         </div>
       `;
 
       document.getElementById('shipLabelsContainer').innerHTML = labelsHtml;
-      // Pre-fill tracking input with master AWB
-      document.getElementById('trackInputValue').value = masterAwb;
-      document.getElementById('docSearchValue').value = masterAwb;
-      showToast("Guías emitidas y tripleta de etiquetas generada");
+      showToast("Guía y etiquetas generadas exitosamente");
     }
 
-    // -------------------------------------------------------------
-    // 7. TRACKING & POD MODULE
-    // -------------------------------------------------------------
     function toggleTrackInputs() {
       const type = document.getElementById('trackSearchType').value;
       const label = document.getElementById('trackInputLabel');
       const input = document.getElementById('trackInputValue');
 
       if (type === "AWB") {
-        label.innerText = "Número de Guía (AWB / Return AWB)";
-        input.value = "795110574638";
+        label.innerText = "Número de Guía (AWB / Tracking)";
+        input.value = "384403557611";
       } else if (type === "TRANSPORT_UNIT") {
         label.innerText = "Referencia: Unidad de Transporte";
         input.value = "CAMION-FLOTA-452";
       } else {
-        label.innerText = "Referencia: Factura";
-        input.value = "FAC-5001234";
+        label.innerText = "Referencia: Factura / PO";
+        input.value = "RD - 1";
       }
     }
 
     function executeTrackingSim() {
-      const type = document.getElementById('trackSearchType').value;
       const value = document.getElementById('trackInputValue').value;
-
-      document.getElementById('trackAWBDisplay').innerText = `CONSULTA: ${value}`;
-      document.getElementById('trackUnitDisplay').innerText = `MODO: ${type}`;
-      showToast("Trazabilidad actualizada correctamente");
+      showToast(`Trazabilidad actualizada para: ${value}`);
     }
 
     function downloadMockPOD() {
       const link = document.createElement("a");
-      link.href = "data:text/plain;charset=utf-8,Simulacion de Proof of Delivery (SPOD) firmado para la guia de Kaufmann";
-      link.download = `FedEx_POD_Signature_${document.getElementById('trackInputValue').value}.txt`;
+      link.href = "data:text/plain;charset=utf-8,COMPROBANTE DE ENTREGA FEDEX (SPOD)%0D%0AGuia: 384403557611%0D%0AEstado: Entregado%0D%0AFirmado por: F.MENA%0D%0ALugar: Viña del Mar, Chile (Recepcionista)%0D%0AFecha: 02 Nov 2026 09:31 hrs";
+      link.download = "FedEx_Proof_Of_Delivery_384403557611.txt";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      showToast("Descargando Comprobante de Entrega Firmado (POD)");
+      showToast("Descargando Comprobante POD");
     }
 
-    // -------------------------------------------------------------
-    // 8. GET DOCUMENTS (CEDIBLE DIGITALIZADO)
-    // -------------------------------------------------------------
     function executeGetDocsSim() {
-      const data = COMPANIES_DATA[currentCompanyKey];
-      const searchValue = document.getElementById('docSearchValue').value || "795110574638";
+      const searchValue = document.getElementById('docSearchValue').value || "384403557611";
 
       const response = {
         "pouchId": "eddff0f4",
@@ -988,7 +1281,7 @@
                 "docFormat": "PNG",
                 "custDocId": "FAC-5001234",
                 "edmId": null,
-                "bufferPage": "iVBORw0KGgoAAAANSUhEUgAABAAAAAMACAYAAACWqT..."
+                "bufferPage": "iVBORw0KGgoAAAANSUhEUgAABAAAAAMACAYAAACWqT...[BASE64_IMAGE]"
               }
             ]
           }
@@ -1001,9 +1294,6 @@
       showToast("Documento cedible firmado recuperado (SCANED)");
     }
 
-    // -------------------------------------------------------------
-    // 9. CANCEL SHIPMENT LOGIC
-    // -------------------------------------------------------------
     function renderCancelPayload() {
       const data = COMPANIES_DATA[currentCompanyKey];
       const awb = document.getElementById('cancelMasterAwb').value || "384610292303";
@@ -1022,19 +1312,16 @@
 
       const mockResponse = {
         "status": "SUCCESS",
-        "message": `Master shipment ${awb} and all associated packages have been successfully cancelled.`
+        "message": `Master shipment ${awb} and all associated MPS packages have been successfully cancelled.`
       };
       document.getElementById('cancelResponseJson').textContent = JSON.stringify(mockResponse, null, 2);
     }
 
     function executeCancelSim() {
       renderCancelPayload();
-      showToast("Guía máster cancelada satisfactoriamente");
+      showToast("Guía máster anulada satisfactoriamente");
     }
 
-    // -------------------------------------------------------------
-    // 10. UTILITIES (COPY TO CLIPBOARD & TOAST)
-    // -------------------------------------------------------------
     function copyField(elementId) {
       const el = document.getElementById(elementId);
       if (!el) return;
@@ -1058,11 +1345,7 @@
 
     function togglePasswordVisibility(fieldId) {
       const field = document.getElementById(fieldId);
-      if (field.type === "password") {
-        field.type = "text";
-      } else {
-        field.type = "password";
-      }
+      field.type = field.type === "password" ? "text" : "password";
     }
 
     function showToast(message) {
