@@ -561,6 +561,71 @@
           </div>
         </div>
 
+        <!-- ================= EXCLUSIVE OAUTH 2.0 GLOBAL TRACKING TOKEN CARD ================= -->
+        <div class="mt-4 bg-gradient-to-r from-purple-50 via-white to-orange-50 border-2 border-purple-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-purple-100 gap-3">
+            <div>
+              <div class="flex items-center space-x-2">
+                <span class="px-2 py-0.5 bg-fedex-purple text-white text-[10px] font-extrabold rounded uppercase tracking-wider">FedEx Global Cloud</span>
+                <span class="px-2 py-0.5 bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-extrabold rounded uppercase tracking-wider">Token Independiente</span>
+                <h3 class="text-xs sm:text-sm font-bold text-gray-900">Autenticación Exclusiva para Tracking (OAuth 2.0 Global)</h3>
+              </div>
+              <p class="text-[11px] text-gray-500 mt-1">
+                A diferencia de <em>Ship</em>, <em>Cancel</em> y <em>GetDocuments</em> (que usan el Gateway regional LAC Dojo con Basic Auth), la API de <strong>Trazabilidad y SPOD</strong> autentica contra el Gateway Corporativo Global mediante <code class="font-mono text-fedex-purple font-semibold">x-www-form-urlencoded</code>.
+              </p>
+            </div>
+            <button onclick="window.executeTrackOAuthSim()" class="inline-flex items-center space-x-2 bg-fedex-purple hover:bg-fedex-purple-light text-white font-semibold text-xs px-3.5 py-2 rounded-xl shadow-sm transition-all cursor-pointer whitespace-nowrap">
+              <i class="fa-solid fa-key text-amber-300"></i>
+              <span>Simular Token Global Tracking</span>
+            </button>
+          </div>
+
+          <!-- Tracking OAuth Parameters & cURL -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs font-mono">
+            <div class="space-y-2">
+              <div class="bg-white p-3 rounded-xl border border-gray-200 space-y-2">
+                <div class="flex justify-between items-center text-[10px] font-bold text-gray-400 uppercase">
+                  <span>Endpoint OAuth Global</span>
+                  <span class="text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">POST x-www-form-urlencoded</span>
+                </div>
+                <div class="text-[11px] text-gray-800 font-bold break-all">https://apis.fedex.com/oauth/token</div>
+                <div class="grid grid-cols-2 gap-2 pt-2 border-t border-gray-100 text-[10px]">
+                  <div>
+                    <span class="text-gray-400 block">Client ID Tracking:</span>
+                    <span id="trackOAuthClientId" class="font-bold text-fedex-purple truncate block">l7655abb26c9354a279de01f40a5e1a679</span>
+                  </div>
+                  <div>
+                    <span class="text-gray-400 block">Client Secret Tracking:</span>
+                    <span id="trackOAuthClientSecret" class="font-bold text-gray-700 truncate block">a3a9d2ab74ab40cab8badb76212a8781</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tracking Token cURL Snippet -->
+              <div>
+                <div class="flex items-center justify-between text-[11px] font-sans font-bold text-gray-600 mb-1">
+                  <span>cURL Oficial Token Tracking</span>
+                  <button onclick="window.copyCode('trackOAuthCurlCode')" class="text-fedex-purple hover:underline text-[11px] flex items-center space-x-1 cursor-pointer">
+                    <i class="fa-regular fa-copy"></i><span>Copiar cURL</span>
+                  </button>
+                </div>
+                <pre id="trackOAuthCurlCode" class="code-dark p-3 rounded-xl text-[11px] overflow-x-auto border border-gray-800 leading-relaxed"></pre>
+              </div>
+            </div>
+
+            <!-- Tracking Token Result -->
+            <div class="space-y-2">
+              <div class="flex items-center justify-between text-[11px] font-sans font-bold text-gray-600">
+                <span>Respuesta Token Global Tracking (Bearer)</span>
+                <span id="trackTokenStatusBadge" class="hidden text-[10px] font-mono font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-full">
+                  <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>Bearer Activo
+                </span>
+              </div>
+              <pre id="trackOAuthResponseJson" class="code-dark p-3 rounded-xl text-[11px] h-[175px] overflow-y-auto border border-gray-800 leading-relaxed"></pre>
+            </div>
+          </div>
+        </div>
+
         <!-- INTERACTIVE REQUEST PAYLOAD FOR TRACKING -->
         <div class="mt-4 bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-2">
           <div class="flex items-center justify-between text-xs font-bold text-gray-700">
@@ -978,6 +1043,8 @@
       }
     };
 
+    let globalTrackBearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJmZWRleC1nbG9iYWwtdHJhY2tpbmctY2xvdWQiLCJzdWIiOiJsNzY1NWFiYjI2YzkzNTRhMjc5ZGUwMWY0MGE1ZTFhNjc5IiwiZXhwIjoyMTQ3NDgzNjQ3fQ.kaufmann_track_token_prod";
+
     // REAL FEDEX TRACKING DELIVERY RESPONSE (AS PROVIDED)
     const REAL_TRACKING_RESPONSE = {
       "transactionId": "38d775c9-8a24-4997-b7dc-e70908815cbd",
@@ -1270,6 +1337,12 @@
       const basicCreds = btoa(`${data.oauthUser}:${data.oauthPass}`);
       const hAuth = document.getElementById('oauthHeaderAuth');
       if (hAuth) hAuth.value = `Basic ${basicCreds}`;
+
+      // Update Tracking OAuth Fields
+      const trkIdEl = document.getElementById('trackOAuthClientId');
+      if (trkIdEl) trkIdEl.innerText = data.trackClientId;
+      const trkSecEl = document.getElementById('trackOAuthClientSecret');
+      if (trkSecEl) trkSecEl.innerText = data.trackClientSecret;
     };
 
     window.onCompanyChange = function(key) {
@@ -1277,6 +1350,7 @@
       currentCompanyKey = key;
       window.applyCompanyData();
       window.renderOAuthPayloads();
+      window.renderTrackOAuthPayloads();
       window.renderShipPayload();
       window.renderTrackRequestPayload();
       window.renderGetDocsRequestPayload();
@@ -1296,6 +1370,7 @@
 
       window.applyCompanyData();
       window.renderOAuthPayloads();
+      window.renderTrackOAuthPayloads();
       window.renderShipPayload();
       window.renderTrackRequestPayload();
       window.renderGetDocsRequestPayload();
@@ -1308,16 +1383,17 @@
         `RUT: ${data.rut}\n` +
         `Cuenta FedEx (EAN): ${data.accountNumber}\n` +
         `----------------------------------------\n` +
-        `[1] OAUTH 2.0 (Basic Auth):\n` +
+        `[1] OAUTH 2.0 REGIONAL LAC DOJO (Ship, Cancel, GetDocs):\n` +
+        `Endpoint: https://ws.fedex.com/LAC/ServicesAPI/oauth/token\n` +
         `UserName: ${data.oauthUser}\n` +
         `Password: ${data.oauthPass}\n` +
-        `Endpoint: https://ws.fedex.com/LAC/ServicesAPI/oauth/token\n` +
         `----------------------------------------\n` +
         `[2] SHIP & CANCEL API:\n` +
         `Client ID (Key): ${data.shipClientId}\n` +
         `Client Secret:   ${data.shipClientSecret}\n` +
         `----------------------------------------\n` +
-        `[3] TRACKING API:\n` +
+        `[3] OAUTH 2.0 GLOBAL TRACKING (Track API & SPOD):\n` +
+        `Endpoint: https://apis.fedex.com/oauth/token\n` +
         `Client ID (Key): ${data.trackClientId}\n` +
         `Client Secret:   ${data.trackClientSecret}\n` +
         `========================================`;
@@ -1428,6 +1504,36 @@
       }, 1000);
 
       showToast("Bearer Token generado y válido por 60 min");
+    };
+
+    window.renderTrackOAuthPayloads = function() {
+      const data = COMPANIES_DATA[currentCompanyKey];
+      const curl = `curl --location 'https://apis.fedex.com/oauth/token' \\\n` +
+        `  --header 'Content-Type: application/x-www-form-urlencoded' \\\n` +
+        `  --data-urlencode 'grant_type=client_credentials' \\\n` +
+        `  --data-urlencode 'client_id=${data.trackClientId}' \\\n` +
+        `  --data-urlencode 'client_secret=${data.trackClientSecret}'`;
+
+      const curlEl = document.getElementById('trackOAuthCurlCode');
+      if (curlEl) curlEl.textContent = curl;
+
+      const mockTrackToken = {
+        "access_token": globalTrackBearerToken,
+        "token_type": "bearer",
+        "expires_in": 3600,
+        "scope": "CXS"
+      };
+
+      const respEl = document.getElementById('trackOAuthResponseJson');
+      if (respEl) respEl.textContent = JSON.stringify(mockTrackToken, null, 2);
+    };
+
+    window.executeTrackOAuthSim = function() {
+      window.renderTrackOAuthPayloads();
+      const badge = document.getElementById('trackTokenStatusBadge');
+      if (badge) badge.classList.remove('hidden');
+      window.renderTrackRequestPayload();
+      showToast("Token Global para Track API generado correctamente");
     };
 
     window.renderShipPayload = function() {
@@ -1711,6 +1817,11 @@
       if (type === "AWB") {
         if (epBadge) epBadge.innerText = "https://apis.fedex.com/track/v1/trackingnumbers";
         reqPayload = {
+          "__commentHeaders": {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${globalTrackBearerToken}`,
+            "x-locale": "es_CL"
+          },
           "trackingInfo": [
             {
               "trackingNumberInfo": {
@@ -1724,6 +1835,11 @@
       } else if (type === "TRANSPORT_UNIT") {
         if (epBadge) epBadge.innerText = "https://apis.fedex.com/track/v1/referencenumbers";
         reqPayload = {
+          "__commentHeaders": {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${globalTrackBearerToken}`,
+            "x-locale": "es_CL"
+          },
           "referencesInformation": {
             "type": "SHIPPER_REFERENCE",
             "value": inputVal,
@@ -1736,6 +1852,11 @@
       } else { // SPOD
         if (epBadge) epBadge.innerText = "https://apis.fedex.com/track/v1/referencenumbers";
         reqPayload = {
+          "__commentHeaders": {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${globalTrackBearerToken}`,
+            "x-locale": "es_CL"
+          },
           "trackDocumentDetail": {
             "documentType": "SIGNATURE_PROOF_OF_DELIVERY",
             "documentFormat": "PDF"
@@ -1940,6 +2061,7 @@
       try {
         window.applyCompanyData();
         window.renderOAuthPayloads();
+        window.renderTrackOAuthPayloads();
         window.renderShipPayload();
         window.renderTrackRequestPayload();
         window.renderGetDocsRequestPayload();
