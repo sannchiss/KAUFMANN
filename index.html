@@ -847,55 +847,60 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
             <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Criterio (searchType)</label>
-            <select id="docSearchType" onchange="window.renderGetDocsRequestPayload()" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-semibold text-gray-800">
+            <select id="docSearchType" onchange="window.onDocSearchTypeChange()" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-semibold text-gray-800 focus:outline-none focus:border-fedex-purple">
               <option value="AWB">AWB (Número de Guía Original)</option>
               <option value="DOC_REF">DOC_REF (Referencia del Documento)</option>
             </select>
           </div>
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Valor de Búsqueda</label>
-            <input id="docSearchValue" type="text" value="384403557611" oninput="window.renderGetDocsRequestPayload()" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono font-bold text-fedex-purple">
+            <label id="docSearchValueLabel" class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Valor de Búsqueda (AWB)</label>
+            <input id="docSearchValue" type="text" value="384403557611" oninput="window.renderGetDocsRequestPayload()" class="w-full bg-white border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono font-bold text-fedex-purple focus:outline-none focus:border-fedex-purple">
           </div>
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Cuenta Pagadora</label>
+            <label class="text-[11px] font-bold text-gray-600 uppercase block mb-1">Cuenta Pagadora Activa</label>
             <input id="docAccountBadge" type="text" readonly class="w-full bg-gray-100 border border-gray-300 rounded-lg py-1.5 px-3 text-xs font-mono text-gray-700">
           </div>
         </div>
 
-        <!-- INTERACTIVE REQUEST PAYLOAD FOR GET DOCUMENTS -->
-        <div class="mt-4 bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-2">
-          <div class="flex items-center justify-between text-xs font-bold text-gray-700">
-            <div class="flex items-center space-x-2">
-              <span class="w-2 h-2 rounded-full bg-fedex-purple"></span>
-              <span>Payload JSON de Solicitud (Request Enviado por SAP a Get Documents)</span>
-            </div>
-            <button onclick="window.copyCode('docsRequestJson')" class="bg-white hover:bg-fedex-purple hover:text-white border border-gray-300 text-fedex-purple font-mono text-[11px] font-bold px-3 py-1 rounded-lg transition-all shadow-xs flex items-center space-x-1.5 cursor-pointer">
-              <i class="fa-regular fa-copy"></i>
-              <span>Copiar Request</span>
-            </button>
-          </div>
-          <pre id="docsRequestJson" class="code-dark p-3.5 rounded-xl text-xs font-mono max-h-40 overflow-y-auto border border-gray-800 leading-relaxed"></pre>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-          <!-- JSON Response -->
+        <!-- 3-COLUMN WORKSPACE: REQUEST JSON | RESPONSE JSON | CEDIBLE VISUAL PREVIEW -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+          <!-- Column 1: Visible Request Payload -->
           <div class="space-y-3">
-            <div class="flex items-center justify-between text-xs font-bold text-gray-500">
-              <span>Respuesta getDocuments (Status: SCANED)</span>
-              <button onclick="window.copyCode('docsResponseJson')" class="text-fedex-purple hover:underline text-[11px] flex items-center space-x-1 cursor-pointer">
-                <i class="fa-regular fa-copy"></i><span>Copiar JSON</span>
+            <div class="flex items-center justify-between text-xs font-bold text-gray-700">
+              <div class="flex items-center space-x-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-fedex-purple"></span>
+                <span>Payload Request JSON (SAP ➔ FedEx)</span>
+              </div>
+              <button onclick="window.copyCode('docsRequestJson')" class="bg-white hover:bg-fedex-purple hover:text-white border border-gray-300 text-fedex-purple font-mono text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all shadow-xs flex items-center space-x-1 cursor-pointer">
+                <i class="fa-regular fa-copy"></i>
+                <span>Copiar Request</span>
               </button>
             </div>
-            <pre id="docsResponseJson" class="code-dark p-4 rounded-xl text-xs font-mono h-[420px] overflow-y-auto border border-gray-800 leading-relaxed"></pre>
+            <pre id="docsRequestJson" class="code-dark p-4 rounded-xl text-xs font-mono h-[440px] overflow-y-auto border border-gray-800 leading-relaxed"></pre>
           </div>
 
-          <!-- Document Render Mockup -->
+          <!-- Column 2: Response JSON -->
           <div class="space-y-3">
-            <div class="flex items-center justify-between text-xs font-bold text-gray-500">
-              <span>Vista Previa del Cedible Recuperado (Decodificado de Base64)</span>
+            <div class="flex items-center justify-between text-xs font-bold text-gray-700">
+              <div class="flex items-center space-x-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                <span>Respuesta getDocuments (JSON)</span>
+              </div>
+              <button onclick="window.copyCode('docsResponseJson')" class="bg-white hover:bg-fedex-purple hover:text-white border border-gray-300 text-fedex-purple font-mono text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all shadow-xs flex items-center space-x-1 cursor-pointer">
+                <i class="fa-regular fa-copy"></i>
+                <span>Copiar Response</span>
+              </button>
+            </div>
+            <pre id="docsResponseJson" class="code-dark p-4 rounded-xl text-xs font-mono h-[440px] overflow-y-auto border border-gray-800 leading-relaxed"></pre>
+          </div>
+
+          <!-- Column 3: Cedible Render Preview -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-xs font-bold text-gray-700">
+              <span>Vista Previa del Cedible Firmado</span>
               <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-300">Status: SCANED</span>
             </div>
-            <div class="bg-gray-100 rounded-xl p-4 border border-gray-300 flex flex-col items-center justify-center min-h-[420px]">
+            <div class="bg-gray-100 rounded-xl p-4 border border-gray-300 flex flex-col items-center justify-center h-[440px] overflow-y-auto">
               <div class="bg-white p-5 rounded-lg shadow-lg border border-gray-300 max-w-sm w-full font-mono text-[10px] space-y-3 relative overflow-hidden">
                 <div class="absolute -right-6 top-8 transform rotate-12 border-2 border-emerald-600 text-emerald-700 font-black text-xs px-4 py-1 rounded select-none opacity-80">
                   SCANED & DIGITALIZED
@@ -916,7 +921,7 @@
                 <div class="pt-3 border-t-2 border-dashed border-gray-300 text-center">
                   <div class="font-serif italic text-base text-blue-900 select-none">F. MENA</div>
                   <div class="text-[9px] text-gray-500 uppercase">Recibí Conforme / Firma y Timbre Cedible</div>
-                  <div class="text-[8px] text-gray-400 mt-0.5">Fecha: 02-11-2026 | AWB: 384403557611</div>
+                  <div id="cediblePreviewFooter" class="text-[8px] text-gray-400 mt-0.5">Fecha: 02-11-2026 | AWB: 384403557611</div>
                 </div>
               </div>
             </div>
@@ -1913,10 +1918,28 @@
       showToast("Descargando Comprobante POD");
     };
 
+    window.onDocSearchTypeChange = function() {
+      const searchType = document.getElementById('docSearchType').value;
+      const labelEl = document.getElementById('docSearchValueLabel');
+      const valInput = document.getElementById('docSearchValue');
+
+      if (searchType === "AWB") {
+        if (labelEl) labelEl.innerText = "Valor de Búsqueda (AWB / Guía)";
+        if (valInput) valInput.value = "384403557611";
+      } else {
+        if (labelEl) labelEl.innerText = "Valor de Búsqueda (DOC_REF / Referencia)";
+        if (valInput) valInput.value = "Customer Reference";
+      }
+
+      window.renderGetDocsRequestPayload();
+    };
+
     window.renderGetDocsRequestPayload = function() {
       const data = COMPANIES_DATA[currentCompanyKey];
-      const searchType = document.getElementById('docSearchType').value;
-      const searchValue = document.getElementById('docSearchValue').value || "384403557611";
+      const searchTypeEl = document.getElementById('docSearchType');
+      const searchType = searchTypeEl ? searchTypeEl.value : "AWB";
+      const valInput = document.getElementById('docSearchValue');
+      const searchValue = valInput ? (valInput.value || (searchType === "AWB" ? "384403557611" : "Customer Reference")) : "384403557611";
 
       const reqPayload = {
         "account": data.accountNumber,
@@ -1926,9 +1949,14 @@
 
       const reqEl = document.getElementById('docsRequestJson');
       if (reqEl) reqEl.textContent = JSON.stringify(reqPayload, null, 2);
+
+      const footEl = document.getElementById('cediblePreviewFooter');
+      if (footEl) footEl.innerText = `Fecha: 02-11-2026 | ${searchType}: ${searchValue}`;
     };
 
     window.executeGetDocsSim = function() {
+      const searchTypeEl = document.getElementById('docSearchType');
+      const searchType = searchTypeEl ? searchTypeEl.value : "AWB";
       const input = document.getElementById('docSearchValue');
       const searchValue = input ? input.value : "384403557611";
       window.renderGetDocsRequestPayload();
@@ -1938,14 +1966,14 @@
         "searchValue": searchValue,
         "documents": [
           {
-            "custDocId": "FAC-5001234",
+            "custDocId": searchType === "AWB" ? "FAC-5001234" : searchValue,
             "docType": "CI",
             "status": "SCANED",
             "pages": [
               {
                 "pageNumber": 0,
                 "docFormat": "PNG",
-                "custDocId": "FAC-5001234",
+                "custDocId": searchType === "AWB" ? "FAC-5001234" : searchValue,
                 "edmId": null,
                 "bufferPage": "iVBORw0KGgoAAAANSUhEUgAABAAAAAMACAYAAACWqT...[BASE64_IMAGE]"
               }
@@ -1958,7 +1986,7 @@
 
       const respEl = document.getElementById('docsResponseJson');
       if (respEl) respEl.textContent = JSON.stringify(response, null, 2);
-      showToast("Documento cedible firmado recuperado (SCANED)");
+      showToast(`Documento cedible recuperado (${searchType}: ${searchValue})`);
     };
 
     window.renderCancelPayload = function() {
